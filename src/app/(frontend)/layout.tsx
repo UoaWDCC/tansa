@@ -11,8 +11,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body className={` antialiased`}>
-        <main className="">
+      <body className={`antialiased`} suppressHydrationWarning>
+        <main>
           <Header />
           {children}
         </main>
