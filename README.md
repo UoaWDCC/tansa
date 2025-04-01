@@ -2,7 +2,7 @@
 
 Welcome to the Tansa repository! 🚀
 
-This project is designed to streamline your workflow and provide a seamless development experience. Follow the steps below to get up and running quickly!
+Follow the steps below to get up and running quickly!
 
 ## Tech Stack
 
