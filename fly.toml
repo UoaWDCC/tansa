@@ -1,11 +1,10 @@
-# fly.toml app configuration file generated for tansa-prod on 2025-04-03T11:59:37+13:00
+# fly.toml app configuration file generated for tansa-prod on 2025-04-03T12:12:17+13:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'tansa-prod'
 primary_region = 'syd'
-swap_size_mb = 512
 
 [build]
 
@@ -19,4 +18,3 @@ swap_size_mb = 512
 
 [[vm]]
   size = 'shared-cpu-1x'
-  memory = '256mb'
