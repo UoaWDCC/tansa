@@ -1,20 +1,21 @@
 import { payloadClient } from './payloadclient'
 
-interface MediaItem {
-  id: number
-  title: string
-  url?: string
-  alt: string
-  width?: number
-  height?: number
+export async function getEventsWithPhotos(): Promise<EventItem[]> {
+  const client = await payloadClient()
+  const eventsWithPhotos = await client.find({
+    collection: 'events',
+    limit: 10,
+  })
+
+  return eventsWithPhotos.docs as EventItem[]
 }
 
-export async function getGalleryPhotos(): Promise<MediaItem[]> {
+export async function getMediaPhotos(): Promise<MediaItem[]> {
   const client = await payloadClient()
-  const galleryPhotos = await client.find({
+  const mediaPhotos = await client.find({
     collection: 'media',
     limit: 10,
   })
 
-  return galleryPhotos.docs as MediaItem[]
+  return mediaPhotos.docs as MediaItem[]
 }

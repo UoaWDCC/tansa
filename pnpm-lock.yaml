@@ -41,6 +41,9 @@ importers:
       graphql:
         specifier: ^16.8.1
         version: 16.10.0
+      lucide:
+        specifier: ^0.486.0
+        version: 0.486.0
       lucide-react:
         specifier: ^0.486.0
         version: 0.486.0(react@19.0.0)
@@ -3087,6 +3090,9 @@ packages:
     resolution: {integrity: sha512-xWop/wMsC1ikiEVLZrxXjPKw4vU/eAip33G2mZHgbWnr4Nr5Rt4Vx4s/q1D3B/rQVbxjOuqASkEZcUxDEKzecw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  lucide@0.486.0:
+    resolution: {integrity: sha512-3dvlZn/unTvbu7O0Ec9l+NF33qC0JnIuUmKQaY1kr5x2ItIwdEXrTA5QtoxD/126x9l8GHzSM9/g5a/skG9mUQ==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -7802,6 +7808,8 @@ snapshots:
   lucide-react@0.486.0(react@19.0.0):
     dependencies:
       react: 19.0.0
+
+  lucide@0.486.0: {}
 
   math-intrinsics@1.1.0: {}
 
