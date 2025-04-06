@@ -1,10 +1,17 @@
-import GalleryClient from '@/app/components/GalleryClient'
+// app/gallery/page.tsx
+import { Suspense } from 'react'
 import { getEventsWithPhotos } from '@/libs/server'
+import Loading from './loading'
+import GalleryClient from '@/components/GalleryClient'
 
-// Server component that fetches data
-export default async function GalleryPage() {
-  // Fetch data server-side
+const GalleryPage = async () => {
   const events = await getEventsWithPhotos()
 
-  return <main className="">{events ? <GalleryClient events={events} /> : 'Loading'}</main>
+  return (
+    <Suspense fallback={<Loading />}>
+      <GalleryClient events={events} />
+    </Suspense>
+  )
 }
+
+export default GalleryPage
