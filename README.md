@@ -128,6 +128,9 @@ After creating a pull request, request a review before merging.
 
 Enjoy coding with Tansa! 💻✨
 
+
+pb president of koutaro fucking hate women club
+=======
 # Contributors ✨
 
 Thank you to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -144,4 +147,5 @@ Thank you to these wonderful people ([emoji key](https://allcontributors.org/doc
 kouTARO PLS HELP ME WITH 220 PLEASE PLEASE PLEASE PLEASE 
 
 TANSA IS THE BEST 1234! !!!!
+
 
