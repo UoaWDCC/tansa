@@ -127,3 +127,5 @@ git push origin feature/your-feature-name
 After creating a pull request, request a review before merging.
 
 Enjoy coding with Tansa! 💻✨
+
+pb president of koutaro fucking hate women club
