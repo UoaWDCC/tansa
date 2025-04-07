@@ -127,3 +127,17 @@ git push origin feature/your-feature-name
 After creating a pull request, request a review before merging.
 
 Enjoy coding with Tansa! 💻✨
+
+# Contributors ✨
+
+Thank you to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<table>
+   <tbody>
+      <tr>
+         <td align="center" valign="top" width="16.66%"><a href="https://github.com/Kot6603"><img src="https://avatars.githubusercontent.com/u/89110272?v=4?s=100" width="100px;" alt="Koutaro Yumiba"/><br /><sub><b>Koutaro Yumiba</b></sub></a><br /><a href="https://github.com/UoaWDCC/VPS/commits?author=Kot6603" title="Code">💻</a></td>
+      </tr>
+   </tbody>
+</table>
+
+
