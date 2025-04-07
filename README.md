@@ -1,4 +1,4 @@
-# Tansa ts
+# TANSA
 
 Welcome to the Tansa repository! 🚀
 
