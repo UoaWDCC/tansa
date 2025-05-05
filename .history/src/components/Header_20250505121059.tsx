@@ -22,14 +22,14 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/sponsors" className="hover:underline">
-              Sponsors
+            <Link href="/contact" className="hover:underline">
+              Contact us
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:underline">
-              Contact
-            </Link>
+            <link href="/sponsors" className="hover:underline">
+              Sponsors
+            </link>
           </li>
         </ul>
       </nav>

@@ -26,11 +26,6 @@ const Header = () => {
               Sponsors
             </Link>
           </li>
-          <li>
-            <Link href="/contact" className="hover:underline">
-              Contact
-            </Link>
-          </li>
         </ul>
       </nav>
     </header>
