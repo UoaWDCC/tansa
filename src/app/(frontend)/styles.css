@@ -118,3 +118,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --color-tansa-blue: hsl(203, 37%, 65%);
+  --color-tansa-cream: hsl(36, 100%, 95%);
+}

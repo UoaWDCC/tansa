@@ -5,5 +5,10 @@ import Loading from './loading'
 import GalleryClient from '@/components/GalleryClient'
 
 export default function AboutPage() {
-  return <div>hello from the sponsors page</div>
+  return (
+    <div>
+      <div className="bg-tansa-blue h-[400px]"></div>
+      <div className="bg-tansa-cream h-[600px]"></div>
+    </div>
+  )
 }
