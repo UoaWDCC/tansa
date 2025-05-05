@@ -18,7 +18,12 @@ const Header = () => {
           </li>
           <li>
             <Link href="/gallery" className="hover:underline">
-              Gallery
+              Events
+            </Link>
+          </li>
+          <li>
+            <Link href="/sponsors" className="hover:underline">
+              Sponsors
             </Link>
           </li>
           <li>
