@@ -1,12 +1,8 @@
-// app/gallery/page.tsx
-import React, { Suspense, useEffect, useState } from 'react'
-import { getEventsWithPhotos } from '@/libs/server'
-import Loading from './loading'
+// app/sponsors/page.tsx
+import React from 'react'
 import fs from 'node:fs'
 import Image from 'next/image'
-import GalleryClient from '@/components/GalleryClient'
 import Papa, { ParseResult } from 'papaparse'
-import { number } from 'node_modules/payload/dist/fields/validations'
 
 type Sponsor = {
   id: number
@@ -25,14 +21,15 @@ const parsed = Papa.parse<Sponsor>(file, {
 
 const sponsors: Sponsor[] = parsed.data as Sponsor[]
 
-export default function AboutPage() {
+export default function SponsorsPage() {
   return (
     <div>
       <div className="bg-tansa-blue h-[400px]"></div>
-      <div className="mt-15 mx-auto w-[50vw]">
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols6 gap-5">
+
+      <div className="mt-15">
+        <div className="flex flex-wrap justify-center gap-7 mx-20">
           {sponsors.map((sponsor, index) => (
-            <div key={index} className="flex items-center gap-4">
+            <div key={index} className="flex flex-col items-center items-center">
               <a href={sponsor.link}>
                 <Image
                   src={`/sponsors/images/${sponsor.image}`}
