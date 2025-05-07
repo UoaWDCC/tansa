@@ -2,8 +2,7 @@
 import React from 'react'
 import fs from 'node:fs'
 import Image from 'next/image'
-import Papa, { ParseResult } from 'papaparse'
-import { APIProvider, Map, KmlLayer } from '@vis.gl/react-google-maps'
+import Papa from 'papaparse'
 
 type Sponsor = {
   id: number
