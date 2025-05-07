@@ -3,6 +3,7 @@ import React from 'react'
 import fs from 'node:fs'
 import Image from 'next/image'
 import Papa, { ParseResult } from 'papaparse'
+import { APIProvider, Map, KmlLayer } from '@vis.gl/react-google-maps'
 
 type Sponsor = {
   id: number
@@ -41,6 +42,13 @@ export default function SponsorsPage() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex justify-center mt-15 mx-auto">
+        <iframe
+          src="https://www.google.com/maps/d/embed?mid=1xX0X1w1pNLM0xoZjKMIOh_6y0CxNEiY&ehbc=2E312F"
+          width="640"
+          height="480"
+        />
       </div>
       <div className="bg-tansa-cream h-[600px]"></div>
     </div>
