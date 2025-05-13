@@ -16,9 +16,13 @@ const Footer: FC<FooterProps> = () => {
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
-    // Handle newsletter signup logic here
-    console.log('Email submitted:', email)
-    setEmail('')
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      console.log('Invalid email submitted: ', email)
+    } else {
+      console.log('Email submitted:', email)
+    }
   }
 
   return (
@@ -105,20 +109,20 @@ const Footer: FC<FooterProps> = () => {
 
           {/* Newsletter Section */}
           <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Sign up to our newsletter!</h3>
+            <h3 className="font-bold text-xl mb-4">Subscribe to our newsletter!</h3>
             <div className="flex mb-4">
               <input
                 type="email"
                 value={email}
                 onChange={handleEmailChange}
-                placeholder="Email address"
+                placeholder="Your email address"
                 className="px-4 py-2 w-full rounded-l text-gray-800"
-                aria-label="Email for newsletter"
+                aria-label="Insert your email here!"
               />
               <button
                 onClick={handleSubmit}
                 className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
-                aria-label="Subscribe to newsletter"
+                aria-label="Subscribe to our newsletter!"
               >
                 <Send size={18} />
               </button>
@@ -126,20 +130,20 @@ const Footer: FC<FooterProps> = () => {
 
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4 py-2">
-              <a href="#" className="hover:text-amber-100" aria-label="Snowflake social link">
+              <a href="#" className="hover:text-amber-100" aria-label="Linktree Icon">
                 <Snowflake size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Email">
+              <a href="#" className="hover:text-amber-100" aria-label="Email Icon">
                 <Mail size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Instagram">
+              <a href="#" className="hover:text-amber-100" aria-label="Instagram Icon">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Facebook">
+              <a href="#" className="hover:text-amber-100" aria-label="Facebook Icon">
                 <Facebook size={24} />
               </a>
               {/* TikTok icon not available in lucide-react, using a text alternative */}
-              <a href="#" className="hover:text-amber-100" aria-label="TikTok">
+              <a href="#" className="hover:text-amber-100" aria-label="TikTok Icon">
                 <span className="text-xl">♪</span>
               </a>
             </div>
