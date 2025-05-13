@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A blank template to get started with Payload 3.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
@@ -35,6 +36,7 @@
     "sharp": "0.32.6",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.6",
+    "tsx": "^4.19.4",
     "tw-animate-css": "^1.2.9"
   },
   "devDependencies": {

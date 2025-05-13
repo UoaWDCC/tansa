@@ -14,7 +14,7 @@ const Footer: FC<FooterProps> = () => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>): void => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -22,6 +22,29 @@ const Footer: FC<FooterProps> = () => {
       console.log('Invalid email submitted: ', email)
     } else {
       console.log('Email submitted:', email)
+      await handleAddEmail(email)
+    }
+  }
+
+  const handleAddEmail = async (email: string) => {
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.status === 201) {
+        console.log('Successfully subscribed:', data)
+      } else {
+        console.error('Subscription failed:', data.error)
+      }
+    } catch (error) {
+      console.error('Error during subscription:', error)
     }
   }
 
