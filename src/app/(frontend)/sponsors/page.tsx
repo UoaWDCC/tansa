@@ -4,6 +4,10 @@ import fs from 'node:fs'
 import Image from 'next/image'
 import Papa from 'papaparse'
 
+export const metadata = {
+  title: 'Sponsors',
+}
+
 type Sponsor = {
   id: number
   image: string
@@ -27,9 +31,9 @@ export default function SponsorsPage() {
       <div className="bg-tansa-blue h-[400px]"></div>
 
       <div className="mt-15">
-        <div className="flex flex-wrap justify-center gap-7 mx-20">
+        <div className="flex flex-wrap items-center justify-center gap-7 mx-20">
           {sponsors.map((sponsor, index) => (
-            <div key={index} className="flex flex-col items-center items-center">
+            <div key={index} className="flex flex-col items-center justify-center">
               <a href={sponsor.link}>
                 <Image
                   src={`/sponsors/images/${sponsor.image}`}
@@ -49,7 +53,7 @@ export default function SponsorsPage() {
           height="480"
         />
       </div>
-      <div className="bg-tansa-cream h-[600px]"></div>
+      <div className="bg-tansa-cream h-[100px]"></div>
     </div>
   )
 }
