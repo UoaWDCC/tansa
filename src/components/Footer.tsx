@@ -18,10 +18,11 @@ const Footer: FC<FooterProps> = () => {
     e.preventDefault()
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      console.log('Invalid email submitted: ', email)
+    if (!email) {
+      console.log('No email was submitted.')
+    } else if (!emailRegex.test(email)) {
+      console.log(email, 'is an invalid email.')
     } else {
-      console.log('Email submitted:', email)
       await handleAddEmail(email)
     }
   }
@@ -39,9 +40,7 @@ const Footer: FC<FooterProps> = () => {
       const data = await response.json()
 
       if (response.status === 201) {
-        console.log('Successfully subscribed:', data)
-      } else {
-        console.error('Subscription failed:', data.error)
+        console.log(data.email, 'has been successfully subscribed to the newsletter!')
       }
     } catch (error) {
       console.error('Error during subscription:', error)
@@ -139,7 +138,7 @@ const Footer: FC<FooterProps> = () => {
                 value={email}
                 onChange={handleEmailChange}
                 placeholder="Your email address"
-                className="px-4 py-2 w-full rounded-l text-gray-800"
+                className="bg-white px-4 py-2 w-full rounded-l text-gray-800"
                 aria-label="Insert your email here!"
               />
               <button
@@ -175,7 +174,7 @@ const Footer: FC<FooterProps> = () => {
 
         {/* Copyright Section */}
         <div className="border-t border-white/30 pt-4">
-          <p>© 2025 TANSA + WDCC</p>
+          <p className="font-bold">© 2025 TANSA + WDCC</p>
         </div>
       </div>
     </footer>
