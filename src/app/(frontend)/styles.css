@@ -4,3 +4,7 @@
   --color-tansa-blue: hsl(203, 37%, 65%);
   --color-tansa-cream: hsl(36, 100%, 95%);
 }
+
+.text-tansa-blue {
+  color: var(--color-tansa-blue);
+}
