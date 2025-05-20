@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     events: Event;
     newsletter_emails: NewsletterEmail;
+    executive_team: ExecutiveTeam;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     newsletter_emails: NewsletterEmailsSelect<false> | NewsletterEmailsSelect<true>;
+    executive_team: ExecutiveTeamSelect<false> | ExecutiveTeamSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -188,6 +190,21 @@ export interface NewsletterEmail {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "executive_team".
+ */
+export interface ExecutiveTeam {
+  id: number;
+  name: string;
+  role: string;
+  ethnicity?: string | null;
+  university?: string | null;
+  studying?: string | null;
+  fun_fact?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -208,6 +225,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletter_emails';
         value: number | NewsletterEmail;
+      } | null)
+    | ({
+        relationTo: 'executive_team';
+        value: number | ExecutiveTeam;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -312,6 +333,20 @@ export interface EventsSelect<T extends boolean = true> {
  */
 export interface NewsletterEmailsSelect<T extends boolean = true> {
   email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "executive_team_select".
+ */
+export interface ExecutiveTeamSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  ethnicity?: T;
+  university?: T;
+  studying?: T;
+  fun_fact?: T;
   updatedAt?: T;
   createdAt?: T;
 }
