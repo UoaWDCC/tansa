@@ -55,7 +55,7 @@ export const Sponsors: CollectionConfig = {
       name: 'location',
       type: 'text',
       label: 'Location',
-      required: true,
+      required: false,
       admin: {
         condition: (data) => data?.uploadType === 'single',
       },
