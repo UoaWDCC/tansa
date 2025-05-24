@@ -3,6 +3,7 @@ import React from 'react'
 import fs from 'node:fs'
 import Image from 'next/image'
 import Papa from 'papaparse'
+import { transform } from 'next/dist/build/swc/generated-native'
 
 export const metadata = {
   title: 'Sponsors',
@@ -28,7 +29,17 @@ const sponsors: Sponsor[] = parsed.data as Sponsor[]
 export default function SponsorsPage() {
   return (
     <div>
-      <div className="bg-tansa-blue h-[400px]"></div>
+      <div className="bg-tansa-blue h-[400px]"> 
+        <div className="flex justify-end h-full overflow-hidden ">
+          <Image 
+          src="/bears/running and pointing 1.svg"
+          alt="bear-icon"
+          width={300}
+          height={0}
+          style={{ transform: 'translate Y (30%)' }}
+          />
+        </div>
+      </div>
 
       <div className="mt-15">
         <div className="flex flex-wrap items-center justify-center gap-7 mx-20">
