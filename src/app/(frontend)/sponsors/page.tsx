@@ -36,7 +36,7 @@ export default function SponsorsPage() {
           alt="bear-icon"
           width={300}
           height={0}
-          style={{ transform: 'translate Y (30%)' }}
+          style={{ transform: 'translateY(30%)' }}
           />
         </div>
       </div>
