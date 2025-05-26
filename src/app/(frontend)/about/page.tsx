@@ -22,7 +22,21 @@ export default function AboutPage() {
         </div>
       </div>
       <div className="bg-tansa-cream h-[600px]">
-
+        <div className="container mx-auto px-4 pt-12 text-center">
+          <h1 className="text-3xl text-tansa-blue font-newkansas">Presidents</h1>
+        </div>
+        <div className="mx-auto flex justify-center gap-15 pt-10">
+          <div className="flex flex-col items-center">
+            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Joey Wu</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">President</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Nicole Burlace</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Vice President</p>
+          </div>
+          </div>
       </div>
     </div>
   )
