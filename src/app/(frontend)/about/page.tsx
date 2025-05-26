@@ -13,7 +13,7 @@ export default function AboutPage() {
         </div>
         <div className="absolute bottom-[-80px] right-0 z-0 w-[400px] md:w-[400px] lg:w-[500px]">
           <img
-            src="/bears/lying_on_stomach.png"
+            src="/bears/lying_on_stomach.svg"
             alt="bear lying on stomach"
             width={500}
             height={500}
