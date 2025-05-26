@@ -60,7 +60,7 @@ export default async function SponsorsPage() {
                     height={200}
                     className="rounded"
                   />
-                  <div className="absolute inset-0 bg-gray-800 bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-200 rounded">
+                  <div className="absolute inset-0 bg-gray-800 bg-opacity-50 opacity-0 group-hover:opacity-90 flex items-center justify-center transition-opacity duration-200 rounded">
                     <span className="text-white text-center text-xs px-2">
                       {sponsor.sponsorshipDetails}
                     </span>
