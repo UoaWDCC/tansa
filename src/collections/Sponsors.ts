@@ -10,6 +10,12 @@ type Sponsor = {
 
 export const Sponsors: CollectionConfig = {
   slug: 'sponsors',
+  access: {
+    read: () => true,
+    create: ({ req }) => !!req.user,
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
+  },
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'location', 'sponsorshipDetails'],
@@ -81,7 +87,7 @@ export const Sponsors: CollectionConfig = {
     {
       name: 'logo',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'logos',
       label: 'Sponsor Logo',
       required: false,
       admin: {

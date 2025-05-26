@@ -11,6 +11,7 @@ import { Events } from './collections/Events'
 import { NewsletterEmails } from './collections/NewsletterEmails'
 import { Sponsors } from './collections/Sponsors'
 import { CSVUploads } from './collections/CSVUploads'
+import { Logos } from './collections/Logos'
 import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, NewsletterEmails, Sponsors, CSVUploads],
+  collections: [Users, Media, Events, NewsletterEmails, Sponsors, CSVUploads, Logos],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -39,8 +40,14 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
-          prefix: 'media', // what collects this refers too
+          prefix: 'media',
         },
+        logos: {
+          prefix: 'logos',
+        },
+      } as {
+        media: { prefix: string }
+        logos: { prefix: string }
       },
       bucket: process.env.S3_BUCKET as string,
       config: {

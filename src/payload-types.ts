@@ -73,6 +73,7 @@ export interface Config {
     newsletter_emails: NewsletterEmail;
     sponsors: Sponsor;
     'csv-uploads': CsvUpload;
+    logos: Logo;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +86,7 @@ export interface Config {
     newsletter_emails: NewsletterEmailsSelect<false> | NewsletterEmailsSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     'csv-uploads': CsvUploadsSelect<false> | CsvUploadsSelect<true>;
+    logos: LogosSelect<false> | LogosSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -204,13 +206,34 @@ export interface Sponsor {
   /**
    * Upload the sponsor logo
    */
-  logo?: (number | null) | Media;
+  logo?: (number | null) | Logo;
   /**
    * Upload a CSV file to add multiple sponsors at once.
    */
   csvFile?: (number | null) | CsvUpload;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos".
+ */
+export interface Logo {
+  id: number;
+  sponsor?: string | null;
+  alt?: string | null;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * Upload a CSV file to add multiple sponsors at once.
@@ -262,6 +285,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'csv-uploads';
         value: number | CsvUpload;
+      } | null)
+    | ({
+        relationTo: 'logos';
+        value: number | Logo;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -389,6 +416,26 @@ export interface SponsorsSelect<T extends boolean = true> {
  * via the `definition` "csv-uploads_select".
  */
 export interface CsvUploadsSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logos_select".
+ */
+export interface LogosSelect<T extends boolean = true> {
+  sponsor?: T;
+  alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
