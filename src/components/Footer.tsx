@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, FC, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
+import { subscribe } from 'diagnostics_channel'
 
 // Interface for Footer props if needed in the future
 interface FooterProps {
@@ -9,20 +10,48 @@ interface FooterProps {
 
 const Footer: FC<FooterProps> = () => {
   const [email, setEmail] = useState<string>('')
+  const [subbed, setSubbed] = useState<Boolean>(false)
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>): void => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    // Handle newsletter signup logic here
-    console.log('Email submitted:', email)
-    setEmail('')
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email) {
+      console.log('No email was submitted.')
+    } else if (!emailRegex.test(email)) {
+      console.log(email, 'is an invalid email.')
+    } else {
+      await handleAddEmail(email)
+    }
+  }
+
+  const handleAddEmail = async (email: string) => {
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.status === 201) {
+        console.log(data.email, 'has been successfully subscribed to the newsletter!')
+        setSubbed(true)
+      }
+    } catch (error) {
+      console.error('Error during subscription:', error)
+    }
   }
 
   return (
-    <footer className="bg-tansa-blue text-white p-4 mt-auto">
+    <footer className="bg-tansa-blue text-white p-6 mt-auto">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* About Us Section */}
@@ -105,41 +134,54 @@ const Footer: FC<FooterProps> = () => {
 
           {/* Newsletter Section */}
           <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Sign up to our newsletter!</h3>
-            <div className="flex mb-4">
-              <input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="Email address"
-                className="px-4 py-2 w-full rounded-l text-gray-800"
-                aria-label="Email for newsletter"
-              />
-              <button
-                onClick={handleSubmit}
-                className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
-                aria-label="Subscribe to newsletter"
-              >
-                <Send size={18} />
-              </button>
-            </div>
+            {!subbed ? (
+              <div className="">
+                <h3 className="font-bold text-xl mb-4">Subscribe to our newsletter!</h3>
+                <div className="flex mb-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    placeholder="Your email address"
+                    className="bg-white px-4 py-2 w-full rounded-l text-gray-800"
+                    aria-label="Insert your email here!"
+                  />
+                  <button
+                    onClick={handleSubmit}
+                    className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
+                    aria-label="Subscribe to our newsletter!"
+                  >
+                    <Send size={18} />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="w-full flex justify-end">
+                <h3 className="font-bold text-l mb-4">Thank you for subscribing!</h3>
+                <img
+                  src="/bears/bear 1.svg"
+                  className="w-20"
+                  alt="Bear waving thanking you for subscribing to our newsletter."
+                />
+              </div>
+            )}
 
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4 py-2">
-              <a href="#" className="hover:text-amber-100" aria-label="Snowflake social link">
+              <a href="#" className="hover:text-amber-100" aria-label="Linktree Icon">
                 <Snowflake size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Email">
+              <a href="#" className="hover:text-amber-100" aria-label="Email Icon">
                 <Mail size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Instagram">
+              <a href="#" className="hover:text-amber-100" aria-label="Instagram Icon">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="hover:text-amber-100" aria-label="Facebook">
+              <a href="#" className="hover:text-amber-100" aria-label="Facebook Icon">
                 <Facebook size={24} />
               </a>
               {/* TikTok icon not available in lucide-react, using a text alternative */}
-              <a href="#" className="hover:text-amber-100" aria-label="TikTok">
+              <a href="#" className="hover:text-amber-100" aria-label="TikTok Icon">
                 <span className="text-xl">♪</span>
               </a>
             </div>
@@ -148,7 +190,7 @@ const Footer: FC<FooterProps> = () => {
 
         {/* Copyright Section */}
         <div className="border-t border-white/30 pt-4">
-          <p>© 2025 TANSA + WDCC</p>
+          <p className="font-bold">© 2025 TANSA + WDCC</p>
         </div>
       </div>
     </footer>

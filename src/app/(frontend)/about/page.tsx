@@ -1,4 +1,5 @@
 // app/gallery/page.tsx
+
 import { Suspense } from 'react'
 import { getEventsWithPhotos } from '@/libs/server'
 import Loading from './loading'
