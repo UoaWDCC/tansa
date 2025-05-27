@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 import csv from 'csv-parser'
 import fs from 'fs'
 import path from 'path'
-import React from 'react'
 
 type Sponsor = {
   name?: string
@@ -173,12 +172,19 @@ export const Sponsors: CollectionConfig = {
             console.error('Error in CSV processing:', error)
             throw error
           }
-        } else if (operation === 'update') {
-          const { uploadType, csvFile, ...rest } = data
-          return rest
         }
-
         return data
+      },
+    ],
+    afterChange: [
+      async ({ doc, operation }) => {
+        if (operation !== 'create') {
+          return {
+            ...doc,
+            __redirect: '/admin/collections/sponsors',
+          }
+        }
+        return doc
       },
     ],
   },
