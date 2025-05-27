@@ -51,7 +51,7 @@ const Footer: FC<FooterProps> = () => {
   }
 
   return (
-    <footer className="bg-tansa-blue text-white p-4 mt-auto">
+    <footer className="bg-tansa-blue text-white p-6 mt-auto">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* About Us Section */}
