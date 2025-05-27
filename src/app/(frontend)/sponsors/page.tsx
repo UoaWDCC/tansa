@@ -1,8 +1,9 @@
 // app/sponsors/page.tsx
 import React from 'react'
 import Image from 'next/image'
+import Papa from 'papaparse'
+import { transform } from 'next/dist/build/swc/generated-native'
 import { Sponsor } from '@/payload-types'
-
 export const metadata = {
   title: 'Sponsors',
 }
@@ -34,7 +35,17 @@ export default async function SponsorsPage() {
 
   return (
     <div>
-      <div className="bg-tansa-blue h-[400px]"></div>
+      <div className="bg-tansa-blue h-[400px]"> 
+        <div className="flex justify-end h-full overflow-hidden ">
+          <Image 
+          src="/bears/running and pointing 1.svg"
+          alt="bear-icon"
+          width={300}
+          height={0}
+          style={{ transform: 'translateY(30%)' }}
+          />
+        </div>
+      </div>
 
       <div className="mt-15">
         <div className="flex flex-wrap justify-center gap-7 mx-20">
