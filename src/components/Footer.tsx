@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, FC, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
+import { subscribe } from 'diagnostics_channel'
 
 // Interface for Footer props if needed in the future
 interface FooterProps {
@@ -9,6 +10,7 @@ interface FooterProps {
 
 const Footer: FC<FooterProps> = () => {
   const [email, setEmail] = useState<string>('')
+  const [subbed, setSubbed] = useState<Boolean>(false)
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
@@ -41,6 +43,7 @@ const Footer: FC<FooterProps> = () => {
 
       if (response.status === 201) {
         console.log(data.email, 'has been successfully subscribed to the newsletter!')
+        setSubbed(true)
       }
     } catch (error) {
       console.error('Error during subscription:', error)
@@ -131,24 +134,37 @@ const Footer: FC<FooterProps> = () => {
 
           {/* Newsletter Section */}
           <div className="md:col-span-1">
-            <h3 className="font-bold text-xl mb-4">Subscribe to our newsletter!</h3>
-            <div className="flex mb-4">
-              <input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="Your email address"
-                className="bg-white px-4 py-2 w-full rounded-l text-gray-800"
-                aria-label="Insert your email here!"
-              />
-              <button
-                onClick={handleSubmit}
-                className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
-                aria-label="Subscribe to our newsletter!"
-              >
-                <Send size={18} />
-              </button>
-            </div>
+            {!subbed ? (
+              <div className="">
+                <h3 className="font-bold text-xl mb-4">Subscribe to our newsletter!</h3>
+                <div className="flex mb-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    placeholder="Your email address"
+                    className="bg-white px-4 py-2 w-full rounded-l text-gray-800"
+                    aria-label="Insert your email here!"
+                  />
+                  <button
+                    onClick={handleSubmit}
+                    className="bg-amber-100 text-gray-800 px-2 rounded-r hover:bg-amber-200"
+                    aria-label="Subscribe to our newsletter!"
+                  >
+                    <Send size={18} />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="w-full flex justify-end">
+                <h3 className="font-bold text-l mb-4">Thank you for subscribing!</h3>
+                <img
+                  src="/bears/bear 1.svg"
+                  className="w-20"
+                  alt="Bear waving thanking you for subscribing to our newsletter."
+                />
+              </div>
+            )}
 
             {/* Social Media Icons */}
             <div className="flex space-x-4 mt-4 py-2">

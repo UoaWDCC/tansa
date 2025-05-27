@@ -6826,7 +6826,6 @@ snapshots:
   '@types/node@22.15.17':
     dependencies:
       undici-types: 6.21.0
-
   '@types/parse-json@4.0.2': {}
 
   '@types/pg@8.10.2':
