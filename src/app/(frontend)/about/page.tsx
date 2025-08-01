@@ -22,7 +22,7 @@ export default function AboutPage() {
           />
         </div>
       </div>
-      <div className="bg-tansa-cream h-[600px]">
+      <div className="bg-tansa-cream h-[500px]">
         <div className="container mx-auto px-4 pt-12 text-center">
           <h1 className="text-3xl text-tansa-blue font-newkansas">Presidents</h1>
         </div>
@@ -36,6 +36,28 @@ export default function AboutPage() {
             <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
             <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Nicole Burlace</p>
             <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Vice President</p>
+          </div>
+          </div>
+      </div>
+      <div className="bg-tansa-cream h-[500px]">
+        <div className="container mx-auto px-4 pt-8 text-center">
+          <h1 className="text-3xl text-tansa-blue font-newkansas">Admin</h1>
+        </div>
+        <div className="mx-auto flex justify-center gap-15 pt-10">
+          <div className="flex flex-col items-center">
+            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Yuan Tsai</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Treasurer</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Nikita Burlace</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Secretary</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Tyler Young</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Senior</p>
           </div>
           </div>
       </div>
