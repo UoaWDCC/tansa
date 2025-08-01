@@ -3,4 +3,13 @@
 @theme {
   --color-tansa-blue: hsl(203, 37%, 65%);
   --color-tansa-cream: hsl(36, 100%, 95%);
+  --font-newkansas: "newkansas", "sans-serif";
+}
+
+@font-face {
+  font-family: 'newkansas';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/fonts/NewKansasBold.otf') format('opentype');
 }
