@@ -1,9 +1,5 @@
 // app/gallery/page.tsx
 
-import { Suspense } from 'react'
-import { getEventsWithPhotos } from '@/libs/server'
-import Loading from './loading'
-
 export default function AboutPage() {
   return (
     <div>
@@ -28,16 +24,32 @@ export default function AboutPage() {
         </div>
         <div className="mx-auto flex justify-center gap-15 pt-10">
           <div className="flex flex-col items-center">
-            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <img
+              src="/placeholder.jpg"
+              alt="placeholder"
+              width={250}
+              height={250}
+              className="rounded-md"
+            ></img>
             <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Joey Wu</p>
             <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">President</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Nicole Burlace</p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Vice President</p>
+            <img
+              src="/placeholder.jpg"
+              alt="placeholder"
+              width={250}
+              height={250}
+              className="rounded-md"
+            ></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
+              Nicole Burlace
+            </p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">
+              Vice President
+            </p>
           </div>
-          </div>
+        </div>
       </div>
       <div className="bg-tansa-cream h-[500px]">
         <div className="container mx-auto px-4 pt-8 text-center">
@@ -45,21 +57,41 @@ export default function AboutPage() {
         </div>
         <div className="mx-auto flex justify-center gap-15 pt-10">
           <div className="flex flex-col items-center">
-            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <img
+              src="/placeholder.jpg"
+              alt="placeholder"
+              width={250}
+              height={250}
+              className="rounded-md"
+            ></img>
             <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Yuan Tsai</p>
             <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Treasurer</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Nikita Burlace</p>
+            <img
+              src="/placeholder.jpg"
+              alt="placeholder"
+              width={250}
+              height={250}
+              className="rounded-md"
+            ></img>
+            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
+              Nikita Burlace
+            </p>
             <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Secretary</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src="/placeholder.jpg" alt="placeholder" width={250} height={250} className="rounded-md"></img>
+            <img
+              src="/placeholder.jpg"
+              alt="placeholder"
+              width={250}
+              height={250}
+              className="rounded-md"
+            ></img>
             <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Tyler Young</p>
             <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Senior</p>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   )
