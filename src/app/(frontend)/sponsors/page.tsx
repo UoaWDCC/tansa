@@ -2,9 +2,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { Sponsor } from '@/payload-types'
-export const metadata = {
-  title: 'Sponsors',
-}
 
 async function getSponsors() {
   try {
@@ -31,15 +28,19 @@ export default async function SponsorsPage() {
   console.log('Got Sponsors from Payload')
 
   return (
-    <div>
-      <div className="bg-tansa-blue h-[400px]">
-        <div className="flex justify-end h-full overflow-hidden ">
+    <div className="">
+      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-between">
+        <div className="font-bold text-white font-newkansas z-10 max-w-6xl mx-auto ">
+          <p className="text-[96px]">Our</p>
+          <h1 className="text-[165px]">Sponsors</h1>
+        </div>
+        <div className="h-full flex items-end overflow-hidden">
           <Image
             src="/bears/running and pointing 1.svg"
             alt="bear-icon"
             width={300}
-            height={0}
-            style={{ transform: 'translateY(30%)' }}
+            height={300}
+            className="translate-y-[30%]"
           />
         </div>
       </div>

@@ -11,7 +11,6 @@ const Loading = () => {
         <div className="flex items-center justify-center py-12">
           <div className="flex flex-col items-center space-y-4">
             <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <p className="text-base font-medium text-gray-700">Loading events...</p>
           </div>
         </div>
       </section>
