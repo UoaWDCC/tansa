@@ -1,55 +1,49 @@
-import SkeletonCard from '@/components/Skeleton'
-import { getMediaPhotos } from '@/libs/server'
 import Image from 'next/image'
-import { Suspense } from 'react'
+import EventSection from '@/components/EventSection'
+import { getEvents } from '@/libs/server'
 
-export default async function GalleryPage() {
+export default async function PastEventsPage() {
+  const events = await getEvents()
+
+  // Group events by title
+  const groupedEvents: Record<string, { date: string; photos: string[] }> = {}
+
+  for (const event of events) {
+    if (!groupedEvents[event.title]) {
+      groupedEvents[event.title] = {
+        date: event.date,
+        photos: [],
+      }
+    }
+
+    const urls = event.photos?.map((photo) => photo.url) ?? []
+    groupedEvents[event.title].photos.push(...urls)
+  }
+
   return (
     <main className="min-h-screen">
-      <div className="bg-tansa-blue h-[400px] flex items-center justify-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white">Media Gallery</h1>
+      {/* Header Section with Bear and Title */}
+      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-center">
+        <h1 className="text-6xl md:text-8xl font-bold text-white font-newkansas z-10">
+          Past Events
+        </h1>
+        <Image
+          src="/bears/hooray 1.svg"
+          alt="Bear"
+          width={200}
+          height={200}
+          className="absolute right-12 bottom-0 hidden md:block"
+        />
       </div>
+
+      {/* Events Section */}
       <div className="bg-tansa-cream py-12">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <SkeletonCard key={i} />
-                ))}
-              </div>
-            }
-          >
-            <MediaSection />
-          </Suspense>
+        <div className="container mx-auto px-4 max-w-7xl space-y-16">
+          {Object.entries(groupedEvents).map(([title, { date, photos }]) => (
+            <EventSection key={title} title={title} date={date} photoUrls={photos} />
+          ))}
         </div>
       </div>
     </main>
-  )
-}
-
-// This is a separate component to use with <Suspense>
-async function MediaSection() {
-  const photos = await getMediaPhotos()
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {photos.map((photo) => (
-        <div
-          key={photo.id}
-          className="rounded-lg overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow duration-300 group"
-        >
-          <div className="aspect-square relative overflow-hidden">
-            <Image
-              src={photo.url || '/placeholder.svg'}
-              alt={photo.alt || `Media image titled ${photo.title}`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-        </div>
-      ))}
-    </div>
   )
 }

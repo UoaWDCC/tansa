@@ -1,6 +1,6 @@
 import { payloadClient } from './payloadclient'
 
-// Function to get media photos from the collection
+// Get media/all photos
 export async function getMediaPhotos(): Promise<MediaItem[]> {
   const client = await payloadClient()
 
@@ -12,4 +12,16 @@ export async function getMediaPhotos(): Promise<MediaItem[]> {
 
   // Return the fetched media photos as MediaItem[] array
   return mediaPhotos.docs as MediaItem[]
+}
+
+// Get events
+export async function getEvents(): Promise<EventItem[]> {
+  const client = await payloadClient()
+
+  const events = await client.find({
+    collection: 'events',
+    limit: 10,
+  })
+
+  return events.docs as EventItem[]
 }
