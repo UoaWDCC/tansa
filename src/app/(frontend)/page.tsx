@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.css'
 import Image from 'next/image'
-import InstagramWidget from './components/InstagramWidget'
+import InstagramWidget from '@/components/InstagramWidget'
 
 export default async function HomePage() {
   return (
@@ -42,16 +42,13 @@ export default async function HomePage() {
                 </button>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0   w-1/4 ">
+            <div className="absolute bottom-0 right-0 w-1/4 ">
               <Image src="./bears/bear 1.svg" alt="TANSA bear" width={600} height={600} />
             </div>
           </div>
         </header>
       </div>
-      <div className="bg-tansa-blue h-[400px]"></div>
-      <h1 className="">home page</h1>
       <InstagramWidget />
-      <div className="bg-tansa-cream h-[600px]"></div>
     </div>
   )
 }

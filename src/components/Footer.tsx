@@ -10,7 +10,7 @@ interface FooterProps {
 
 const Footer: FC<FooterProps> = () => {
   const [email, setEmail] = useState<string>('')
-  const [subbed, setSubbed] = useState<Boolean>(false)
+  const [subbed, setSubbed] = useState<boolean>(false)
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value)
