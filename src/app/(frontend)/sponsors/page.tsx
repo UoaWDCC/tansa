@@ -30,10 +30,7 @@ export default async function SponsorsPage() {
   return (
     <div className="">
       <div className="bg-tansa-blue relative h-[400px] flex items-center justify-between">
-        <div className="font-bold text-white font-newkansas z-10 max-w-6xl mx-auto ">
-          <p className="text-[96px]">Our</p>
-          <h1 className="text-[165px]">Sponsors</h1>
-        </div>
+        <h1 className="text-[165px] pl-25 font-bold text-white font-newkansas">Sponsors</h1>
         <div className="h-full flex items-end overflow-hidden">
           <Image
             src="/bears/running and pointing 1.svg"
