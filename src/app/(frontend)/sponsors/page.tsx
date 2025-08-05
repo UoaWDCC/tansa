@@ -1,12 +1,7 @@
 // app/sponsors/page.tsx
 import React from 'react'
 import Image from 'next/image'
-import Papa from 'papaparse'
-import { transform } from 'next/dist/build/swc/generated-native'
 import { Sponsor } from '@/payload-types'
-export const metadata = {
-  title: 'Sponsors',
-}
 
 async function getSponsors() {
   try {
@@ -21,7 +16,6 @@ async function getSponsors() {
     }
 
     const data = await response.json()
-    console.log('Sponsors API response:', data)
     return data.docs || []
   } catch (error) {
     console.error('Error fetching sponsors:', error)
@@ -31,18 +25,19 @@ async function getSponsors() {
 
 export default async function SponsorsPage() {
   const sponsors = await getSponsors()
-  console.log('Sponsors from API:', sponsors)
+  console.log('Got Sponsors from Payload')
 
   return (
-    <div>
-      <div className="bg-tansa-blue h-[400px]"> 
-        <div className="flex justify-end h-full overflow-hidden ">
-          <Image 
-          src="/bears/running and pointing 1.svg"
-          alt="bear-icon"
-          width={300}
-          height={0}
-          style={{ transform: 'translateY(30%)' }}
+    <div className="">
+      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-between">
+        <h1 className="text-[165px] pl-25 font-bold text-white font-newkansas">Sponsors</h1>
+        <div className="h-full flex items-end overflow-hidden">
+          <Image
+            src="/bears/running and pointing 1.svg"
+            alt="bear-icon"
+            width={300}
+            height={300}
+            className="translate-y-[30%]"
           />
         </div>
       </div>

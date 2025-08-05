@@ -19,35 +19,25 @@ export const Events: CollectionConfig = {
       label: 'Event Date',
     },
     {
-      name: 'category',
-      type: 'text',
-      required: true,
-      label: 'Event Category',
-    },
-    {
       name: 'description',
       type: 'textarea',
-      required: true,
+      required: false,
       label: 'Event Description',
     },
     {
       name: 'coverImage',
       type: 'upload',
-      relationTo: 'media', // This will link to the Media collection
-      required: true,
+      relationTo: 'media',
+      required: false,
       label: 'Cover Image',
     },
     {
       name: 'photos',
-      type: 'array',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true, // Enables multiple image uploads
+      required: false,
       label: 'Event Photos',
-      fields: [
-        {
-          name: 'photo',
-          type: 'relationship',
-          relationTo: 'media', // Reference the Media collection for multiple images
-        },
-      ],
     },
   ],
 }

@@ -170,15 +170,9 @@ export interface Event {
   id: number;
   title: string;
   date: string;
-  category: string;
-  description: string;
-  coverImage: number | Media;
-  photos?:
-    | {
-        photo?: (number | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
+  description?: string | null;
+  coverImage?: (number | null) | Media;
+  photos?: (number | Media)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -375,15 +369,9 @@ export interface MediaSelect<T extends boolean = true> {
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
   date?: T;
-  category?: T;
   description?: T;
   coverImage?: T;
-  photos?:
-    | T
-    | {
-        photo?: T;
-        id?: T;
-      };
+  photos?: T;
   updatedAt?: T;
   createdAt?: T;
 }
