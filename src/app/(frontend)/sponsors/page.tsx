@@ -33,7 +33,7 @@ export default async function SponsorsPage() {
         <h1 className="text-[165px] pl-25 font-bold text-white font-newkansas">Sponsors</h1>
         <div className="h-full flex items-end overflow-hidden">
           <Image
-            src="/bears/running and pointing 1.svg"
+            src="/bears/running-pointing.svg"
             alt="bear-icon"
             width={300}
             height={300}
