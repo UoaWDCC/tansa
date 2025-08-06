@@ -1,6 +1,23 @@
 // app/gallery/page.tsx
+import { Suspense } from 'react'
+import Loading from './loading'
+import { Exec } from '@/payload-types' 
 
-export default function AboutPage() {
+
+async function getExecMembers(): Promise<Exec[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/exec?limit=100`, {
+    next: { revalidate: 60 }, 
+  });
+  const data = await res.json();
+  return data.docs; 
+}
+
+export default async function AboutPage() {
+
+  const exec = await getExecMembers();
+
+  const presidents = exec.filter(member => member.category === 'Presidents');
+  const admins = exec.filter(member => member.category === 'Admin');    
   return (
     <div>
       <div className="bg-tansa-blue h-[400px] flex flex-col justify-end relative overflow-hidden">
@@ -23,32 +40,17 @@ export default function AboutPage() {
           <h1 className="text-3xl text-tansa-blue font-newkansas">Presidents</h1>
         </div>
         <div className="mx-auto flex justify-center gap-15 pt-10">
+          {presidents.map((member) => (
           <div className="flex flex-col items-center">
-            <img
-              src="/placeholder.jpg"
-              alt="placeholder"
-              width={250}
-              height={250}
-              className="rounded-md"
-            ></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Joey Wu</p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">President</p>
+<img src={member.url || '/placeholder.jpg'}
+            alt={member.name}
+            width={250}
+            height={250}
+            className="rounded-md"
+                    />                   <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">{member.name}</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">{member.position}</p>
           </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="/placeholder.jpg"
-              alt="placeholder"
-              width={250}
-              height={250}
-              className="rounded-md"
-            ></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
-              Nicole Burlace
-            </p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">
-              Vice President
-            </p>
-          </div>
+          ))}
         </div>
       </div>
       <div className="bg-tansa-cream h-[500px]">
@@ -56,43 +58,22 @@ export default function AboutPage() {
           <h1 className="text-3xl text-tansa-blue font-newkansas">Admin</h1>
         </div>
         <div className="mx-auto flex justify-center gap-15 pt-10">
+          <div className="mx-auto flex justify-center gap-15 pt-10">
+          {admins.map((member) => (
           <div className="flex flex-col items-center">
-            <img
-              src="/placeholder.jpg"
-              alt="placeholder"
-              width={250}
-              height={250}
-              className="rounded-md"
-            ></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Yuan Tsai</p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Treasurer</p>
+        <img src={member.url || '/placeholder.jpg'}
+            alt={member.name}
+            width={250}
+            height={250}
+            className="rounded-md"
+                    />            
+        <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">{member.name}</p>
+            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">{member.position}</p>
           </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="/placeholder.jpg"
-              alt="placeholder"
-              width={250}
-              height={250}
-              className="rounded-md"
-            ></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
-              Nikita Burlace
-            </p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Secretary</p>
+              ))}
           </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="/placeholder.jpg"
-              alt="placeholder"
-              width={250}
-              height={250}
-              className="rounded-md"
-            ></img>
-            <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">Tyler Young</p>
-            <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">Senior</p>
-          </div>
-        </div>
       </div>
-    </div>
+      </div>
+      </div>
   )
 }
