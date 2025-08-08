@@ -74,6 +74,7 @@ export interface Config {
     sponsors: Sponsor;
     'csv-uploads': CsvUpload;
     logos: Logo;
+    exec: Exec;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,6 +88,7 @@ export interface Config {
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     'csv-uploads': CsvUploadsSelect<false> | CsvUploadsSelect<true>;
     logos: LogosSelect<false> | LogosSelect<true>;
+    exec: ExecSelect<false> | ExecSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -258,6 +260,36 @@ export interface CsvUpload {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exec".
+ */
+export interface Exec {
+  id: number;
+  name: string;
+  position: string;
+  degree: string;
+  category:
+    | 'Presidents'
+    | 'Admin'
+    | 'Marketing'
+    | 'Activities'
+    | 'AESIR'
+    | 'Public Relations Officer'
+    | 'Design'
+    | 'Photography';
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -290,6 +322,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'logos';
         value: number | Logo;
+      } | null)
+    | ({
+        relationTo: 'exec';
+        value: number | Exec;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -438,6 +474,27 @@ export interface LogosSelect<T extends boolean = true> {
   sponsor?: T;
   alt?: T;
   prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exec_select".
+ */
+export interface ExecSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  degree?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
