@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="mx-auto flex justify-center gap-15 pt-10">
           <div className="flex flex-col items-center">
             <img
-              src="/placeholder.jpg"
+              src="/placeholder.svg"
               alt="placeholder"
               width={250}
               height={250}
@@ -36,7 +36,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/placeholder.jpg"
+              src="/placeholder.svg"
               alt="placeholder"
               width={250}
               height={250}
@@ -58,7 +58,7 @@ export default function AboutPage() {
         <div className="mx-auto flex justify-center gap-15 pt-10">
           <div className="flex flex-col items-center">
             <img
-              src="/placeholder.jpg"
+              src="/placeholder.svg"
               alt="placeholder"
               width={250}
               height={250}
@@ -69,7 +69,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/placeholder.jpg"
+              src="/placeholder.svg"
               alt="placeholder"
               width={250}
               height={250}
@@ -82,7 +82,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/placeholder.jpg"
+              src="/placeholder.svg"
               alt="placeholder"
               width={250}
               height={250}
