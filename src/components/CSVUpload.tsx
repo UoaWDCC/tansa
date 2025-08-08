@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { usePayloadAPI } from 'payload/components/hooks'
 
 export const CSVUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null)
