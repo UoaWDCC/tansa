@@ -84,7 +84,7 @@ const Header: FC<HeaderProps> = () => {
 
           {/* Join Us Button */}
           <Link
-            href="https://forms.gle/TfqaHE6BagznXxiV7"
+            href="/sign-up"
             className="bg-tansa-cream text-gray-700 px-5 py-2 rounded-full font-bold transition-all duration-300 hover:bg-white hover:shadow-lg hover:scale-105"
           >
             Join us!

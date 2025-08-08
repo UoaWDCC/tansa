@@ -41,7 +41,6 @@ export default async function AboutPage() {
           />
         </div>
       </div>
-
       {categories.map(({ title, members }) => (
         <div key={title} className="bg-tansa-cream min-h-[500px]">
           <div className="container mx-auto px-4 pt-12 text-center">
@@ -51,7 +50,7 @@ export default async function AboutPage() {
             {members.map((member) => (
               <div key={member.id} className="flex flex-col items-center">
                 <img
-                  src={member.url || '/placeholder.jpg'}
+                  src={member.url || '/placeholder.svg'}
                   alt={member.name}
                   width={250}
                   height={250}
