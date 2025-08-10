@@ -5,6 +5,9 @@ import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'WDCC - Tansa',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

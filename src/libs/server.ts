@@ -1,4 +1,5 @@
 import { payloadClient } from './payloadclient'
+import { Exec } from '@/payload-types'
 
 // Get media/all photos
 export async function getMediaPhotos(): Promise<MediaItem[]> {
@@ -24,4 +25,16 @@ export async function getEvents(): Promise<EventItem[]> {
   })
 
   return events.docs as EventItem[]
+}
+
+// Get exec members
+export async function getExecMembers(): Promise<Exec[]> {
+  const client = await payloadClient()
+
+  const execMembers = await client.find({
+    collection: 'exec', // Collection name in Payload CMS
+    limit: 100,
+  })
+
+  return execMembers.docs as Exec[]
 }
