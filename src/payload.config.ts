@@ -11,7 +11,9 @@ import { NewsletterEmails } from './collections/NewsletterEmails'
 import { Sponsors } from './collections/Sponsors'
 import { CSVUploads } from './collections/CSVUploads'
 import { Logos } from './collections/Logos'
+import { Exec } from './collections/Execs'
 import { s3Storage } from '@payloadcms/storage-s3'
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, NewsletterEmails, Sponsors, CSVUploads, Logos],
+  collections: [Users, Media, Events, NewsletterEmails, Sponsors, CSVUploads, Logos, Exec],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
