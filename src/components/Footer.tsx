@@ -1,14 +1,9 @@
 'use client'
-import React, { useState, FC, ChangeEvent, MouseEvent } from 'react'
+import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
-import { subscribe } from 'diagnostics_channel'
+import Image from 'next/image'
 
-// Interface for Footer props if needed in the future
-interface FooterProps {
-  // Add any props you might need
-}
-
-const Footer: FC<FooterProps> = () => {
+const Footer = () => {
   const [email, setEmail] = useState<string>('')
   const [subbed, setSubbed] = useState<boolean>(false)
 
@@ -158,10 +153,12 @@ const Footer: FC<FooterProps> = () => {
             ) : (
               <div className="w-full flex justify-end">
                 <h3 className="font-bold text-l mb-4">Thank you for subscribing!</h3>
-                <img
+                <Image
                   src="/bears/bear 1.svg"
                   className="w-20"
                   alt="Bear waving thanking you for subscribing to our newsletter."
+                  width={100}
+                  height={100}
                 />
               </div>
             )}

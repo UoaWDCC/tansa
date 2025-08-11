@@ -1,3 +1,4 @@
+import InstagramWidget from '@/components/InstagramWidget'
 import Image from 'next/image'
 import React from 'react'
 
@@ -5,7 +6,6 @@ export default function HomePage() {
   return (
     <div className="bg-tansa-blue">
       <div className="max-w-7xl mx-auto flex items-center px-8 py-16 relative">
-        
         {/* Left side text */}
         <div className="font-newkansas text-tansa-cream max-w-lg z-10">
           <div className="flex items-baseline space-x-3">
@@ -32,6 +32,9 @@ export default function HomePage() {
             priority
           />
         </div>
+      </div>
+      <div className="bg-tansa-cream">
+        <InstagramWidget />
       </div>
     </div>
   )

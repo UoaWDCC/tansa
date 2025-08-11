@@ -22,12 +22,12 @@ export default async function AboutPage() {
     <div className="bg-tansa-blue">
       {/* HEADER */}
       <div className="bg-tansa-blue overflow-hidden">
-        <div className="max-w-6xl relative mx-auto flex items-center justify-between py-16">
+        <div className="max-w-6xl h-[300px] relative mx-auto flex items-center justify-between py-16">
           <div>
             <h1 className="text-6xl text-tansa-cream font-newkansas">Meet our</h1>
             <h1 className="text-8xl text-tansa-cream font-newkansas">Team!</h1>
           </div>
-          <div className="w-[300px] md:w-[400px] bottom-[-40px] absolute right-0">
+          <div className="w-[400px] bottom-[-70px] absolute right-0">
             <Image
               src="/bears/lying_on_stomach.svg"
               alt="bear lying on stomach"
@@ -38,8 +38,8 @@ export default async function AboutPage() {
           </div>
         </div>
       </div>
- {/* TEAM SECTIONS */}
- {categories
+      {/* TEAM SECTIONS */}
+      {categories
         .filter(({ members }) => members.length > 0)
         .map(({ title, members }) => (
           <div key={title} className="bg-tansa-cream">
@@ -48,10 +48,7 @@ export default async function AboutPage() {
             </div>
             <div className="mx-auto flex flex-wrap justify-center gap-10 pt-6 pb-6">
               {members.map((member) => (
-                <div
-                  key={member.id}
-                  className="flex flex-col items-center w-[250px] min-h-[350px]"
-                >
+                <div key={member.id} className="flex flex-col items-center w-[250px] min-h-[350px]">
                   <Image
                     src={member.url || '/placeholder.svg'}
                     alt={member.name}
