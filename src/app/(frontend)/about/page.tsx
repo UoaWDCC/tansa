@@ -19,43 +19,47 @@ export default async function AboutPage() {
   ]
 
   return (
-    <div>
-      <div className="bg-tansa-blue h-[400px] flex flex-col justify-end relative overflow-hidden">
-        <div className="container mx-20 px-20 mt-20 mb-10 relative z-10">
-          <h1 className="text-6xl text-tansa-cream font-newkansas">Meet our</h1>
-          <h1 className="text-8xl text-tansa-cream font-newkansas">Team!</h1>
-        </div>
-        <div className="absolute bottom-[-80px] right-0 z-0 w-[400px] md:w-[400px] lg:w-[500px]">
-          <Image
-            src="/bears/lying_on_stomach.svg"
-            alt="bear lying on stomach"
-            width={500}
-            height={500}
-            className="object-contain w-full h-auto"
-          />
+    <div className="bg-tansa-blue">
+      {/* HEADER */}
+      <div className="bg-tansa-blue overflow-hidden">
+        <div className="max-w-6xl h-[300px] relative mx-auto flex items-center justify-between py-16">
+          <div>
+            <h1 className="text-6xl text-tansa-cream font-newkansas">Meet our</h1>
+            <h1 className="text-8xl text-tansa-cream font-newkansas">Team!</h1>
+          </div>
+          <div className="w-[400px] bottom-[-70px] absolute right-0">
+            <Image
+              src="/bears/lying_on_stomach.svg"
+              alt="bear lying on stomach"
+              width={400}
+              height={400}
+              className="object-contain"
+            />
+          </div>
         </div>
       </div>
+      {/* TEAM SECTIONS */}
       {categories
-        .filter(({ members }) => members.length > 0) // Only keep categories with members
+        .filter(({ members }) => members.length > 0)
         .map(({ title, members }) => (
-          <div key={title} className="bg-tansa-cream min-h-[500px]">
+          <div key={title} className="bg-tansa-cream">
             <div className="container mx-auto px-4 pt-12 text-center">
               <h1 className="text-3xl text-tansa-blue font-newkansas">{title}</h1>
             </div>
-            <div className="mx-auto flex flex-wrap justify-center gap-10 pt-10">
+            <div className="mx-auto flex flex-wrap justify-center gap-10 pt-6 pb-6">
               {members.map((member) => (
-                <div key={member.id} className="flex flex-col items-center">
+                <div key={member.id} className="flex flex-col items-center w-[250px] min-h-[350px]">
                   <Image
                     src={member.url || '/placeholder.svg'}
                     alt={member.name}
                     width={250}
                     height={250}
-                    className="rounded-md"
+                    className="rounded-md object-cover h-[250px] w-[250px]"
                   />
                   <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
                     {member.name}
                   </p>
-                  <p className="mt-2 text-center text-base text-tansa-blue font-newkansas">
+                  <p className="text-center text-base text-tansa-blue font-newkansas">
                     {member.position}
                   </p>
                 </div>

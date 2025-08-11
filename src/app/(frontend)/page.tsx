@@ -1,54 +1,41 @@
-import React from 'react'
-import './styles.css'
-import Image from 'next/image'
 import InstagramWidget from '@/components/InstagramWidget'
+import Image from 'next/image'
+import React from 'react'
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
-    <div>
-      <div className="bg-tansa-blue h-[70vh] relative">
-        <header>
-          <div className="relative w-full h-[70vh] ">
-            {/* Covers banner of home */}
-            <div className="relative w-3/4 h-[50vh] ">
-              {/* Covers 3/4 width banner of home for text */}
-              <div className="relative  w-full h-1/8 top-[35%] flex items-center gap-4 pl-[15%] font-newkansas">
-                <h1 className="text-[clamp(2rem,4vw,3rem)] text-white whitespace-nowrap">Hello!</h1>
-                <h2 className="text-[clamp(1rem,2.2vw,1.2rem)] mt-5 text-white whitespace-nowrap">
-                  We are
-                </h2>
-              </div>
-              <div className="relative w-full h-1/4 top-[35%] flex items-center gap-4 pl-[15%] font-newkansas">
-                <h3 className="text-[clamp(4rem,6vw,8rem)] text-white whitespace-nowrap">TANSA!</h3>
-              </div>
-              <div className="relative w-full h-1/4 top-[30%] flex items-center gap-4 pl-[15%] font-newkansas">
-                <p className="text-[clamp(1rem,2vw,3rem)] text-white  whitespace-nowrap">
-                  The largest socio-cultural club at the
-                </p>
-              </div>
-              <div className="relative w-full h-1/4 top-[18%] flex items-center gap-4 pl-[15%] font-newkansas">
-                <p className="text-[clamp(1rem,2vw,3rem)] text-white whitespace-nowrap">
-                  University of Auckland and AUT.
-                </p>
-              </div>
-              <div className="relative w-full h-1/4 top-[10%] flex items-center gap-4 pl-[15%]">
-                <button className="bg-white hover:bg-blue-70 text-tansa-blue py-2 px-4 rounded-full">
-                  <a
-                    href="https://linktr.ee/tansa.ausa?fbclid=PAZXh0bgNhZW0CMTEAAadiiDBVMHQN6ViFsa9FcHEMDebruppwam1b001rZ8SxoztA-DYHSPrfZoZVmA_aem_jYajqwBJtKpurNPDNyguDQ"
-                    className="font-medium"
-                  >
-                    Join us!
-                  </a>
-                </button>
-              </div>
-            </div>
-            <div className="absolute bottom-0 right-0 w-1/4 ">
-              <Image src="./bears/bear 1.svg" alt="TANSA bear" width={600} height={600} />
-            </div>
+    <div className="bg-tansa-blue">
+      <div className="max-w-7xl mx-auto flex items-center px-8 py-16 relative">
+        {/* Left side text */}
+        <div className="font-newkansas text-tansa-cream max-w-lg z-10">
+          <div className="flex items-baseline space-x-3">
+            <h2 className="text-6xl font-bold">Hello!</h2>
+            <h3 className="text-3xl font-semibold">We are</h3>
           </div>
-        </header>
+          <h1 className="text-9xl font-extrabold mt-2">TANSA!</h1>
+          <p className="text-2xl font-medium mt-4 leading-snug">
+            The largest socio-cultural club at the University of Auckland and AUT.
+          </p>
+          <button className="mt-6 bg-tansa-cream text-gray-700 px-6 py-3 hover:cursor-pointer rounded-full font-bold font-sans text-lg duration-100 hover:bg-white hover:scale-105">
+            Join us!
+          </button>
+        </div>
+
+        {/* Bear image  */}
+        <div className="absolute right-0 bottom-0 top-0 flex items-end">
+          <Image
+            src="/bears/homeBear.svg"
+            width={400}
+            height={400}
+            alt="Tansa Bear"
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
-      <InstagramWidget />
+      <div className="bg-tansa-cream">
+        <InstagramWidget />
+      </div>
     </div>
   )
 }

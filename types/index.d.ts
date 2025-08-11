@@ -14,7 +14,7 @@ type EventItem = {
   date: string
   description?: string
   coverImage?: string
-  photos?: string[]
+  photos?: MediaItem[]
 }
 
 // Website Types

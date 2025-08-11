@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <main className="min-h-screen">
       {/* Header Section with Bear and Title */}
-      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-center"></div>
+      <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center"></div>
 
       {/* Loading Skeleton Section */}
       <section className="py-12 bg-tansa-cream">
