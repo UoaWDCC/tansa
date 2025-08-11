@@ -1,30 +1,37 @@
-import Image from 'next/image'
+import Image from "next/image"
 
-type EventSectionProps = {
+interface EventSectionProps {
   title: string
   date: string
-  photoUrls: string[] // array of image URLs
+  photoUrls: string[]
 }
 
 export default function EventSection({ title, date, photoUrls }: EventSectionProps) {
   return (
-    <section className="space-y-4">
+    <section className="space-y-6">
+      {/* Title Row */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-tansa-blue">{title}</h2>
-          <p className="text-sm text-gray-500">({date})</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-tansa-blue font-newkansas">
+            {title}
+          </h2>
+          <p className="text-sm text-gray-600">({date})</p>
         </div>
-        <button className="bg-tansa-blue text-white text-sm px-4 py-1 rounded-full hover:bg-blue-800">
+        <button className="bg-tansa-blue text-white rounded-full px-4 py-1 text-sm font-medium hover:opacity-90 transition">
           Photos
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {/* Photos */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {photoUrls.map((url, idx) => (
-          <div key={idx} className="rounded-lg overflow-hidden shadow-md">
-            <div className="aspect-[4/3] relative">
-              <Image src={url} alt={`${title} photo ${idx + 1}`} fill className="object-cover" />
-            </div>
+          <div key={idx} className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={url}
+              alt={`${title} photo ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
           </div>
         ))}
       </div>

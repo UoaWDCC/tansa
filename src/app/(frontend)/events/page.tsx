@@ -15,35 +15,49 @@ export default async function PastEventsPage() {
         photos: [],
       }
     }
-
     const urls = event.photos?.map((photo) => photo.url) ?? []
     groupedEvents[event.title].photos.push(...urls)
   }
 
   return (
-    <main className="min-h-screen">
-      {/* Header Section with Bear and Title */}
-      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-center">
-        <h1 className="text-6xl md:text-8xl font-bold text-white font-newkansas z-10">
-          Past Events
-        </h1>
-        <Image
-          src="/bears/hooray 1.svg"
-          alt="Bear"
-          width={200}
-          height={200}
-          className="absolute right-12 bottom-0 hidden md:block"
-        />
+    <div className="bg-tansa-blue">
+      {/* Header Section */}
+      <div className="max-w-6xl mx-auto flex items-center justify-between py-16 relative overflow-clip">
+        {/* Left text */}
+        <div className="font-newkansas font-bold text-tansa-cream leading-none text-8xl">
+          <h1>
+            Past
+          </h1>
+          <h1>
+            Events
+          </h1>
+        </div>
+
+        {/* Bear image */}
+        <div className="absolute right-10 bottom-[-175px]">
+          <Image
+            src="/bears/hooray 1.svg"
+            alt="Bear"
+            width={450}
+            height={450}
+            className="object-contain"
+          />
+        </div>
       </div>
 
-      {/* Events Section */}
-      <div className="bg-tansa-cream py-12">
-        <div className="container mx-auto px-4 max-w-7xl space-y-16">
+      {/* Events */}
+      <div className="bg-tansa-cream py-12 border-t-8 border-tansa-cream">
+        <div className="container mx-auto max-w-6xl space-y-20">
           {Object.entries(groupedEvents).map(([title, { date, photos }]) => (
-            <EventSection key={title} title={title} date={date} photoUrls={photos} />
+            <EventSection
+              key={title}
+              title={title}
+              date={date}
+              photoUrls={photos}
+            />
           ))}
         </div>
       </div>
-    </main>
+    </div>
   )
 }
