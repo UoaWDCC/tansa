@@ -1,5 +1,5 @@
 import { payloadClient } from './payloadclient'
-import { Exec } from '@/payload-types'
+import { Exec, Sponsor } from '@/payload-types'
 
 // Get media/all photos
 export async function getMediaPhotos(): Promise<MediaItem[]> {
@@ -37,4 +37,16 @@ export async function getExecMembers(): Promise<Exec[]> {
   })
 
   return execMembers.docs as Exec[]
+}
+
+// Get sponsors from Payload
+export async function getSponsors(): Promise<Sponsor[]> {
+  const client = await payloadClient()
+
+  const sponsors = await client.find({
+    collection: 'sponsors', // name of your Payload collection
+    limit: 100, // adjust if needed
+  })
+
+  return sponsors.docs as Sponsor[]
 }

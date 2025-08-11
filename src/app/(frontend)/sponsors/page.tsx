@@ -1,112 +1,48 @@
 // app/sponsors/page.tsx
 import React from 'react'
 import Image from 'next/image'
-import { Sponsor } from '@/payload-types'
-
-async function getSponsors() {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
-    const response = await fetch(`${baseUrl}/api/sponsors`, {
-      method: 'GET',
-      cache: 'no-store',
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch sponsors')
-    }
-
-    const data = await response.json()
-    return data.docs || []
-  } catch (error) {
-    console.error('Error fetching sponsors:', error)
-    return []
-  }
-}
+import { getSponsors } from '@/libs/server'
+import SponsorsList from '@/components/SponsorsList'
 
 export default async function SponsorsPage() {
   const sponsors = await getSponsors()
-  console.log('Got Sponsors from Payload')
 
   return (
-    <div className="">
-      <div className="bg-tansa-blue relative h-[400px] flex items-center justify-between">
-        <h1 className="text-[165px] pl-25 font-bold text-white font-newkansas">Sponsors</h1>
-        <div className="h-full flex items-end overflow-hidden">
-          <Image
-            src="/bears/running-pointing.svg"
-            alt="bear-icon"
-            width={300}
-            height={300}
-            className="translate-y-[30%]"
-          />
+    <div>
+      <div className="bg-tansa-blue">
+        {/* Header Section */}
+        <div className="max-w-6xl h-[300px] mx-auto flex items-center justify-between pt-16 relative overflow-clip">
+          <div className="font-newkansas font-bold text-tansa-cream leading-none text-8xl">
+            <h1>Our</h1>
+            <h1>Sponsors</h1>
+          </div>
+
+          <div className="absolute right-[-30px] bottom-[-250px]">
+            <Image
+              src="/bears/running-pointing.svg"
+              alt="Bear"
+              width={450}
+              height={450}
+              className="object-contain"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="mt-15">
-        <div className="flex flex-wrap justify-center gap-7 mx-20">
-          {sponsors.length === 0 ? (
-            <div className="text-center w-full text-red-500">
-              No sponsors found or failed to load sponsors.
-            </div>
-          ) : (
-            sponsors.map((sponsor: Sponsor) => {
-              const imageSrc =
-                sponsor.logo && typeof sponsor.logo !== 'number' && sponsor.logo.url
-                  ? sponsor.logo.url
-                  : '/sponsors/images/default.png'
+      {/* Sponsors list with search */}
+      <SponsorsList sponsors={sponsors} />
 
-              const imageAlt = sponsor.name || 'Sponsor Logo'
-
-              const imageElement = (
-                <>
-                  <Image
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={200}
-                    height={200}
-                    className="rounded"
-                  />
-                  <div className="absolute inset-0 bg-gray-800 bg-opacity-50 opacity-0 group-hover:opacity-90 flex items-center justify-center transition-opacity duration-200 rounded">
-                    <span className="text-white text-center text-xs px-2">
-                      {sponsor.sponsorshipDetails}
-                    </span>
-                  </div>
-                </>
-              )
-
-              return (
-                <div
-                  key={sponsor.id}
-                  className="flex flex-col items-center justify-center w-full max-w-36"
-                >
-                  <div className="relative group w-full flex justify-center items-center">
-                    {sponsor.instagram ? (
-                      <a
-                        href={sponsor.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block"
-                      >
-                        {imageElement}
-                      </a>
-                    ) : (
-                      <div className="block">{imageElement}</div>
-                    )}
-                  </div>
-                </div>
-              )
-            })
-          )}
-        </div>
-      </div>
-      <div className="flex justify-center mt-15 mx-auto">
+      {/* Map Section */}
+      <div className="flex justify-center m-15 mx-auto">
         <iframe
           src="https://www.google.com/maps/d/embed?mid=1xX0X1w1pNLM0xoZjKMIOh_6y0CxNEiY&ehbc=2E312F"
           width="640"
           height="480"
+          title="Sponsors Map"
+          className="border-0"
+          loading="lazy"
         />
       </div>
-      <div className="bg-tansa-cream h-[100px]"></div>
     </div>
   )
 }
