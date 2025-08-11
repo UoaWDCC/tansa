@@ -1,15 +1,11 @@
 'use client'
 import Link from 'next/link'
-import React, { FC } from 'react'
-import { Snowflake } from 'lucide-react'
+import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-interface HeaderProps {
-  // Add any props needed in the future
-}
 
-const Header: FC<HeaderProps> = () => {
+const Header = () => {
   const pathname = usePathname()
 
   const navItems = [
@@ -21,9 +17,9 @@ const Header: FC<HeaderProps> = () => {
   ]
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-10 px-4 py-4 select-none">
+    <header className="z-10 px-4 py-4 bg-tansa-blue">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
-        {/* Logo and Organization Name */}
+        {/* Tansa Logo and Name */}
         <Link href="/">
           <div className="flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
@@ -36,11 +32,11 @@ const Header: FC<HeaderProps> = () => {
               />
             </div>
 
-            <div className="text-white">
-              <h1 className="font-bold text-lg leading-tight transition-colors duration-300 group-hover:text-tansa-cream">
+            <div className="text-white select-none">
+              <h1 className="font-bold text-lg text-tansa-cream leading-tight transition-colors duration-300 group-hover:text-white">
                 Taiwanese and New Zealand
               </h1>
-              <h2 className="text-lg leading-tight transition-colors duration-300 group-hover:text-tansa-cream">
+              <h2 className="text-lg text-tansa-cream leading-tight transition-colors duration-300 group-hover:text-white">
                 Students' Association
               </h2>
             </div>
@@ -48,14 +44,14 @@ const Header: FC<HeaderProps> = () => {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:block">
+        <nav className="hidden md:block ">
           <ul className="flex items-center space-x-8 text-tansa-cream pl-24">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   className={`relative px-2 py-1 font-bold group ${
-                    pathname === item.href ? 'text-white' : 'hover:text-white'
+                    pathname === item.href ? 'text-tansa-cream' : 'hover:text-white'
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
@@ -77,23 +73,22 @@ const Header: FC<HeaderProps> = () => {
           {/* Snowflake Icon */}
           <Link
             href="https://linktr.ee/tansa.ausa"
-            className="text-white transition-all duration-300 hover:rotate-90 hover:scale-110"
+            target="blank"
+            className="text-white transition-all duration-300 hover:scale-110"
           >
-            <Snowflake size={32} />
+            <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
           </Link>
 
           {/* Join Us Button */}
           <Link
             href="/sign-up"
-            className="bg-tansa-cream text-gray-700 px-5 py-2 rounded-full font-bold transition-all duration-300 hover:bg-white hover:shadow-lg hover:scale-105"
+            className="bg-tansa-cream text-gray-700 px-5 py-2 rounded-full font-bold transition-all duration-100 hover:bg-white hover:scale-105"
           >
             Join us!
           </Link>
         </div>
       </div>
 
-      {/* Mobile Menu - Hidden by default, would need JavaScript to toggle */}
-      <div className="md:hidden">{/* Mobile menu implementation would go here */}</div>
     </header>
   )
 }
