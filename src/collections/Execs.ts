@@ -19,20 +19,33 @@ export const Exec: CollectionConfig = {
       label: 'Alt Text', // Descriptive alt text for accessibility
     },
     {
-        name: 'degree',
-        type: 'text', 
-        required: true, 
-        label: 'Degree Text'
+      name: 'degree',
+      type: 'text',
+      required: true,
+      label: 'Degree Text',
     },
     {
       name: 'category',
-      type: 'select', 
-      required: true, 
-      options: ['Presidents', 'Admin', 'Marketing', 'Activities', 'AESIR', 'Public Relations Officer', 'Design', 'Photography'],
-      label: 'Category Text'
-    }
+      type: 'select',
+      required: true,
+      options: [
+        'Presidents',
+        'Admin',
+        'Marketing',
+        'Activities',
+        'AESIR',
+        'Public Relations Officer',
+        'Design',
+        'Photography',
+      ],
+      label: 'Category Text',
+    },
+    {
+      name: 'profileImage',
+      type: 'upload',
+      relationTo: 'media', // Links to existing media collection
+      required: false,
+      label: 'Profile Image',
+    },
   ],
-  upload: {
-    mimeTypes: ['image/*'], // Allow only images to be uploaded
-  },
 }
