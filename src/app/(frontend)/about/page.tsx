@@ -50,7 +50,7 @@ export default async function AboutPage() {
               {members.map((member) => (
                 <div key={member.id} className="flex flex-col items-center w-[250px] min-h-[350px]">
                   <Image
-                    src={member.url || '/placeholder.svg'}
+                    src={member.profileImage?.url || '/placeholder.svg'}
                     alt={member.name}
                     width={250}
                     height={250}
