@@ -27,7 +27,7 @@ export default async function AboutPage() {
             <h1 className="text-6xl text-tansa-cream font-newkansas">Meet our</h1>
             <h1 className="text-8xl text-tansa-cream font-newkansas">Team!</h1>
           </div>
-          <div className="w-[400px] bottom-[-70px] absolute right-0">
+          <div className="w-[400px] bottom-[-70px] absolute right-0 select-none">
             <Image
               src="/bears/lying_on_stomach.svg"
               alt="bear lying on stomach"

@@ -30,7 +30,7 @@ export default async function PastEventsPage() {
         </div>
 
         {/* Bear image */}
-        <div className="absolute right-10 bottom-[-190px]">
+        <div className="absolute right-0 bottom-[-190px] select-none">
           <Image
             src="/bears/hooray 1.svg"
             alt="Bear"

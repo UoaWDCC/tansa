@@ -17,7 +17,7 @@ export default async function SponsorsPage() {
             <h1>Sponsors</h1>
           </div>
 
-          <div className="absolute right-[-30px] bottom-[-250px]">
+          <div className="absolute right-[-20px] bottom-[-250px]">
             <Image
               src="/bears/running-pointing.svg"
               alt="Bear"
