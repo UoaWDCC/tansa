@@ -11,6 +11,13 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { dev, isServer }) => {
+    // Disable webpack caching in development to avoid snapshot errors
+    if (dev) {
+      config.cache = false
+    }
+    return config
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

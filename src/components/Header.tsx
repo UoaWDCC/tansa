@@ -4,7 +4,6 @@ import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-
 const Header = () => {
   const pathname = usePathname()
 
@@ -17,7 +16,7 @@ const Header = () => {
   ]
 
   return (
-    <header className="z-10 px-4 py-4 bg-tansa-blue">
+    <header className="sticky top-0 z-50 px-4 py-4 bg-tansa-blue">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Tansa Logo and Name */}
         <Link href="/">
@@ -88,7 +87,6 @@ const Header = () => {
           </Link>
         </div>
       </div>
-
     </header>
   )
 }
