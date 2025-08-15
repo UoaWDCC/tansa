@@ -47,7 +47,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
       <div className="bg-tansa-blue">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Link
-            href="/past-events"
+            href="/events"
             className="inline-flex items-center text-tansa-cream hover:text-tansa-cream/80 transition-colors mb-6"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
