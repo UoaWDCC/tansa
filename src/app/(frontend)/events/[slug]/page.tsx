@@ -5,12 +5,13 @@ import { getEvents } from '@/libs/server'
 import { notFound } from 'next/navigation'
 
 interface EventGalleryPageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
+  // ✅ Await params before using
+  const { slug } = await params
+
   const events: EventItem[] = await getEvents()
 
   // Group events by title and find the matching event
@@ -32,7 +33,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
       title
         .toLowerCase()
         .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '') === params.slug,
+        .replace(/[^a-z0-9-]/g, '') === slug,
   )
 
   if (!eventEntry) {
