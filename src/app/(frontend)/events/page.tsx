@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import EventSection from '@/components/EventSection'
+import EventCard from '@/components/EventCard'
 import { getEvents } from '@/libs/server'
 
 export default async function PastEventsPage() {
@@ -7,7 +7,6 @@ export default async function PastEventsPage() {
 
   // Group events by title
   const groupedEvents: Record<string, { date: string; photos: string[] }> = {}
-
   for (const event of events) {
     if (!groupedEvents[event.title]) {
       groupedEvents[event.title] = {
@@ -28,7 +27,6 @@ export default async function PastEventsPage() {
           <h1>Past</h1>
           <h1>Events</h1>
         </div>
-
         {/* Bear image */}
         <div className="absolute right-0 bottom-[-190px] select-none">
           <Image
@@ -41,12 +39,23 @@ export default async function PastEventsPage() {
         </div>
       </div>
 
-      {/* Events */}
+      {/* Events Grid */}
       <div className="bg-tansa-cream py-12 border-t-8 border-tansa-cream">
-        <div className="container mx-auto max-w-6xl space-y-20">
-          {Object.entries(groupedEvents).map(([title, { date, photos }]) => (
-            <EventSection key={title} title={title} date={date} photoUrls={photos} />
-          ))}
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {Object.entries(groupedEvents).map(([title, { date, photos }]) => (
+              <EventCard
+                key={title}
+                title={title}
+                date={date}
+                photoUrls={photos}
+                slug={title
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^a-z0-9-]/g, '')}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
