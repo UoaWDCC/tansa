@@ -54,7 +54,7 @@ const Footer = () => {
             <h3 className="font-bold text-xl mb-4">About Us</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/about" className="hover:underline">
                   Our Team
                 </a>
               </li>
@@ -64,7 +64,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/sponsors" className="hover:underline">
                   Our Sponsors
                 </a>
               </li>
@@ -81,7 +81,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/events" className="hover:underline">
                   Past Events
                 </a>
               </li>
@@ -115,7 +115,7 @@ const Footer = () => {
             <h3 className="font-bold text-xl mb-4">Sponsor</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/sponsors" className="hover:underline">
                   Sponsorship Perks
                 </a>
               </li>
