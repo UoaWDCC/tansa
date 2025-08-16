@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import { ArrowRight, MoveRight } from 'lucide-react'
+import { ArrowRight, MoveRight, PawPrint } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 const Header = () => {
@@ -18,9 +18,9 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 px-4 py-4 bg-tansa-blue">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        {/* Tansa Logo and Name */}
-        <Link href="/">
+      <div className="flex items-center justify-between w-full">
+        {/*Left Side Element*/}
+        <Link href="/" className="flex-1">
           <div className="flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <Image
@@ -44,24 +44,22 @@ const Header = () => {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:block ">
-          <ul className="flex items-center space-x-8 text-tansa-cream pl-24">
+        <nav className="hidden md:block flex-2">
+          <ul className="flex items-center justify-center space-x-10 text-tansa-cream">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`relative px-2 py-1 font-bold group ${
+                  className={`relative px-2 py-1 font-bold group flex items-center ${
                     pathname === item.href ? 'text-tansa-cream' : 'hover:text-white'
                   }`}
                 >
-                  <span className="relative z-10">{item.label}</span>
-
-                  {/* Hover and active indicator (underline) */}
-                  <span
-                    className={`absolute left-0 bottom-0 h-0.5 bg-white transition-all duration-300 ${
-                      pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
-                  ></span>
+                  <span className="flex items-center relative">
+                    <span className="transition-transform duration-200 group-hover:-translate-x-4 ml-1 mr-2">
+                      {item.label}
+                    </span>
+                    <ArrowRight className="h-4 w-4 absolute transition-all duration-200 opacity-0 group-hover:opacity-100 right-[-24px] group-hover:right-0" />
+                  </span>
                 </Link>
               </li>
             ))}
@@ -69,24 +67,33 @@ const Header = () => {
         </nav>
 
         {/* Right Side Elements */}
-        <div className="flex items-center space-x-4">
-          {/* Snowflake Icon */}
-          <Link
-            href="https://linktr.ee/tansa.ausa"
-            target="blank"
-            className="text-white transition-all duration-300 hover:scale-110"
-          >
-            <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
-          </Link>
+        <div className="flex-1 flex justify-end">
+          <div className="flex items-center space-x-4">
+            {/* Snowflake Icon */}
+            <Link
+              href="https://linktr.ee/tansa.ausa"
+              target="blank"
+              className="text-white transition-all duration-300 hover:scale-110"
+            >
+              <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
+            </Link>
 
-          {/* Join Us Button */}
-          <Link
-            href="/sign-up"
-            className="bg-tansa-cream text-tansa-blue px-6 py-2 border border-2 border-black rounded-full font-bold transition-all duration-100 hover:bg-white justify-center items-center flex group"
-          >
-            Join TANSA!
-            <ArrowRight className="inline-block ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+            {/* Join Us Button */}
+            <Link
+              href="/sign-up"
+              className="bg-tansa-cream text-tansa-blue px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
+            >
+              <span className="inline-block h-4 w-4 relative">
+                <PawPrint className="absolute h-4 w-4 left-0 top-0 transition-transform duration-200 group-hover:-translate-x-6 opacity-100 group-hover:opacity-0" />
+              </span>
+              <span className="mx-2 flex items-center relative">
+                <span className="transition-transform duration-200 group-hover:-translate-x-4 ml-1 mr-2">
+                  Join TANSA!
+                </span>
+                <ArrowRight className="h-4 w-4 absolute transition-all duration-200 opacity-0 group-hover:opacity-100 right-[-24px] group-hover:right-0" />
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
