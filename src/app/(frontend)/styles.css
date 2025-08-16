@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -8,7 +8,7 @@
   --color-tansa-cream: hsl(36, 100%, 95%);
   --color-tansa-primary-text: hsl(36, 100%, 95%);
   --color-tansa-secondary-text: hsl(203, 37%, 65%);
-  --font-newkansas: "newkansas", "sans-serif";
+  --font-newkansas: 'newkansas', 'sans-serif';
 }
 
 @font-face {

@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
+import { ArrowRight, MoveRight } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 const Header = () => {
@@ -81,9 +82,10 @@ const Header = () => {
           {/* Join Us Button */}
           <Link
             href="/sign-up"
-            className="bg-tansa-cream text-gray-700 px-5 py-2 rounded-full font-bold transition-all duration-100 hover:bg-white hover:scale-105"
+            className="bg-tansa-cream text-tansa-blue px-6 py-2 border border-2 border-black rounded-full font-bold transition-all duration-100 hover:bg-white justify-center items-center flex group"
           >
-            Join us!
+            Join TANSA!
+            <ArrowRight className="inline-block ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

@@ -43,6 +43,9 @@ import {
   Venus,
   NonBinary,
 } from 'lucide-react'
+import RegistrationTextInput from './RegistrationTextInput'
+import RegistrationDropdown from './RegistrationDropdown'
+import RegistrationHeading from './RegistrationHeading'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
@@ -202,194 +205,114 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Personal Information Section */}
       <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">Personal Information</h3>
-          <p className="text-sm text-gray-600">Please provide your basic personal details</p>
-        </div>
+        <RegistrationHeading label="Personal Information" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="firstName">First Name *</Label>
-            <Input
-              id="firstName"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Enter your first name"
-              required
-            />
-          </div>
+          <RegistrationTextInput
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Enter your first name"
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name *</Label>
-            <Input
-              id="lastName"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Enter your last name"
-              required
-            />
-          </div>
+          <RegistrationTextInput
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Enter your last name"
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="phoneNumber">Phone Number *</Label>
-            <Input
-              id="phoneNumber"
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="Enter your phone number"
-              required
-            />
-          </div>
+          <RegistrationTextInput
+            label="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Enter your phone number"
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+          <RegistrationTextInput
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            type="email"
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="gender">Gender *</Label>
-            <Select value={gender} onValueChange={setGender} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your gender" />
-              </SelectTrigger>
-              <SelectContent>
-                {genderOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    <div className="flex items-center gap-2">
-                      <option.icon className="h-4 w-4" />
-                      {option.label}
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <RegistrationDropdown
+            label="Gender"
+            value={gender}
+            onValueChange={setGender}
+            placeholder="Select your gender"
+            options={genderOptions}
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="ethnicity">Ethnicity *</Label>
-            <Select value={ethnicity} onValueChange={setEthnicity} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your ethnicity" />
-              </SelectTrigger>
-              <SelectContent>
-                {ethnicityOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <RegistrationDropdown
+            label="Ethnicity"
+            value={ethnicity}
+            onValueChange={setEthnicity}
+            placeholder="Select your ethnicity"
+            options={ethnicityOptions}
+            required
+          />
         </div>
       </div>
 
       {/* University Information Section */}
       <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">University Information</h3>
-          <p className="text-sm text-gray-600">
-            Academic details and university identification.{' '}
-            <span className="font-semibold">
-              If you are not a university student or recent alumni, you unfortunately cannot
-              register for TANSA.
-            </span>
-          </p>
-        </div>
+        <RegistrationHeading
+          label="University Information"
+          subtitle="If you are not a university student or recent alumni, you unfortunately cannot register for TANSA."
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="universityId">UoA ID / AUT Student Number</Label>
-            <span className="italic text-xs text-gray-500">
-              For example, 123456789 (UoA) and 12345678 (AUT).
-            </span>
-            <Input
-              id="universityId"
-              type="text"
-              value={universityId}
-              onChange={(e) => setUniversityId(e.target.value)}
-              placeholder="Enter your ID / Student Number"
-            />
-          </div>
+          <RegistrationTextInput
+            label="UoA ID or AUT Student Number"
+            value={universityId}
+            subtitle="For example, 123456789 (UoA) and 12345678 (AUT)."
+            onChange={(e) => setUniversityId(e.target.value)}
+            placeholder="Enter your UoA ID or AUT student number"
+            required
+          />
+          <RegistrationTextInput
+            label="UoA UPI or AUT Network Login"
+            value={upi}
+            subtitle="For example, setn738 (UoA) and ses7129 (AUT)."
+            onChange={(e) => setUpi(e.target.value)}
+            placeholder="Enter your UoA UPI or AUT network login"
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="upi">UoA UPI / AUT Network Login </Label>
-            <span className="italic text-xs text-gray-500">
-              For example, setn738 (UoA) and ses7129 (AUT).
-            </span>
-            <Input
-              id="upi"
-              type="text"
-              value={upi}
-              onChange={(e) => setUpi(e.target.value)}
-              placeholder="Enter your UPI / Network Login"
-            />
-          </div>
+          <RegistrationDropdown
+            label="Area of Study"
+            value={areaOfStudy}
+            onValueChange={setAreaOfStudy}
+            placeholder="Select your area of study"
+            options={areaOfStudyOptions}
+            required
+          />
 
-          <div className="space-y-2">
-            <Label htmlFor="areaOfStudy">Area of Study *</Label>
-            <Select value={areaOfStudy} onValueChange={setAreaOfStudy} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your area of study" />
-              </SelectTrigger>
-              <SelectContent>
-                {areaOfStudyOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    <div className="flex items-center gap-2">
-                      <option.icon className="h-4 w-4" />
-                      {option.label}
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="yearLevel">Year Level *</Label>
-            <Select value={yearLevel} onValueChange={setYearLevel} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your year level" />
-              </SelectTrigger>
-              <SelectContent>
-                {yearLevelOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    <div className="flex items-center gap-2">
-                      <option.icon className="h-4 w-4" />
-                      {option.label}
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <RegistrationDropdown
+            label="Year Level"
+            value={yearLevel}
+            onValueChange={setYearLevel}
+            placeholder="Select your year level"
+            options={yearLevelOptions}
+            required
+          />
         </div>
       </div>
 
       {/* Payment Section */}
       <div className="space-y-4">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">Payment Details</h3>
-          <p className="text-sm text-gray-600">Complete your membership registration payment</p>
-        </div>
+        <RegistrationHeading label="Payment Details" />
 
         {/* Express Payment Methods */}
         <div className="space-y-3">
           <PaymentRequestForm clientSecret={clientSecret} />
-          <div className="flex items-center gap-4">
-            <div className="flex-1 border-t border-gray-300"></div>
-            <span className="text-sm text-gray-500 bg-white px-3">or pay with card</span>
-            <div className="flex-1 border-t border-gray-300"></div>
-          </div>
         </div>
 
         <div className="border rounded-md p-3">
@@ -403,7 +326,11 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
         </Alert>
       )}
 
-      <Button type="submit" disabled={!stripe || isLoading} className="w-full">
+      <Button
+        type="submit"
+        disabled={!stripe || isLoading}
+        className="w-full bg-tansa-blue text-white"
+      >
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

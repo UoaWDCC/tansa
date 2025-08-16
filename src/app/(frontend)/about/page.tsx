@@ -20,7 +20,6 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-tansa-blue">
-      {/* HEADER */}
       <div className="bg-tansa-blue overflow-hidden">
         <div className="max-w-6xl h-[300px] relative mx-auto flex items-center justify-between py-16">
           <div>
