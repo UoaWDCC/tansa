@@ -1,20 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, MoreVertical } from 'lucide-react'
 import { getEvents } from '@/libs/server'
 import { notFound } from 'next/navigation'
 
 interface EventGalleryPageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
-  // ✅ Await params before using
-  const { slug } = await params
+  const { slug } = params
 
   const events: EventItem[] = await getEvents()
 
-  // Group events by title and find the matching event
   const groupedEvents: Record<string, { date: string; photos: string[] }> = {}
   for (const event of events) {
     if (!groupedEvents[event.title]) {
@@ -27,7 +25,6 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
     groupedEvents[event.title].photos.push(...urls)
   }
 
-  // Find event by slug
   const eventEntry = Object.entries(groupedEvents).find(
     ([title]) =>
       title
@@ -45,7 +42,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
   return (
     <div className="min-h-screen bg-tansa-cream">
       {/* Header */}
-      <div className="bg-tansa-blue">
+      <div className="bg-tansa-blue h-[300px]">
         <div className="max-w-6xl mx-auto px-4 py-8">
           <Link
             href="/events"
@@ -61,24 +58,32 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
           </div>
         </div>
       </div>
-
       {/* Gallery */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {photos.map((url, idx) => (
-            <div
-              key={idx}
-              className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
-            >
-              <Image
-                src={url}
-                alt={`${title} photo ${idx + 1}`}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              />
-            </div>
-          ))}
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
+          {photos.map((url, idx) => {
+            const heights = ['h-48', 'h-64', 'h-80', 'h-56', 'h-72', 'h-60']
+            const randomHeight = heights[idx % heights.length]
+
+            return (
+              <div
+                key={idx}
+                className={`relative ${randomHeight} break-inside-avoid mb-4 cursor-pointer group rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300`}
+              >
+                <Image
+                  src={url || '/placeholder.svg'}
+                  alt={`${title} photo ${idx + 1}`}
+                  fill
+                  priority={idx < 8}
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                />
+
+                {/* Optional: Add subtle overlay on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+              </div>
+            )
+          })}
         </div>
 
         {/* Empty state */}
