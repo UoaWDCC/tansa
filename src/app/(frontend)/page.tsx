@@ -15,16 +15,17 @@ export default function HomePage() {
           </div>
           <h1 className="text-9xl font-extrabold mt-2">TANSA!</h1>
           <p className="text-2xl font-medium mt-4 leading-snug">
-            The largest socio-cultural club at the University of Auckland and AUT.
+            The largest socio-cultural club at the <br />
+            University of Auckland and AUT.
           </p>
         </div>
 
         {/* Bear image  */}
-        <div className="absolute right-0 bottom-0 top-0 flex items-end">
+        <div className="absolute right-[-100px] bottom-0 top-0 flex items-end">
           <Image
             src="/bears/homeBear.svg"
-            width={500}
-            height={500}
+            width={700}
+            height={700}
             alt="Tansa Bear"
             className="object-contain"
             priority
@@ -41,6 +42,7 @@ export default function HomePage() {
       </div>
       <div className="bg-tansa-cream">
         <InstagramWidget />
+        <EventsCarousel images={[]} />
       </div>
     </div>
   )

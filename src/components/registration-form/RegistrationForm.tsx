@@ -354,7 +354,7 @@ export function StripeCheckoutForm() {
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 2900 }), // $29.00
+      body: JSON.stringify({ amount: 500 }), // $5.00
     })
       .then((res) => {
         if (!res.ok) {
