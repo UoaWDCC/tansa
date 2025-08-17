@@ -23,7 +23,7 @@ export default async function PastEventsPage() {
       {/* Header Section */}
       <div className="max-w-6xl h-[300px] mx-auto flex items-center justify-between py-16 relative overflow-clip">
         {/* Left text */}
-        <div className="font-newkansas font-bold text-tansa-cream leading-none text-8xl">
+        <div className="font-newkansas font-bold text-white leading-none text-8xl">
           <h1>Past</h1>
           <h1>Events</h1>
         </div>
