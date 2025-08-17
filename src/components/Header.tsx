@@ -62,19 +62,26 @@ const Header = () => {
           <ul className="flex items-center justify-center space-x-10 text-tansa-cream">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`relative px-2 py-1 font-bold group flex items-center ${
+                <button
+                  onClick={() => handleClick(item.href)}
+                  disabled={loadingPath === item.href}
+                  className={`relative px-2 py-1 font-bold group flex items-center transition-colors duration-200 ${
                     pathname === item.href ? 'text-tansa-cream' : 'hover:text-white'
-                  }`}
+                  } ${loadingPath === item.href ? 'opacity-50 cursor-wait' : ''}`}
                 >
                   <span className="flex items-center relative">
                     <span className="transition-transform duration-200 group-hover:-translate-x-4 ml-1 mr-2">
                       {item.label}
                     </span>
-                    <ArrowRight className="h-4 w-4 absolute transition-all duration-200 opacity-0 group-hover:opacity-100 right-[-24px] group-hover:right-0" />
+                    <ArrowRight
+                      className={`h-4 w-4 absolute transition-all duration-200 right-[-24px] group-hover:right-0 ${
+                        loadingPath === item.href
+                          ? 'opacity-100 animate-pulse'
+                          : 'opacity-0 group-hover:opacity-100'
+                      }`}
+                    />
                   </span>
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
