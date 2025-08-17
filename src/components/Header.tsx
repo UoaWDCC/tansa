@@ -3,7 +3,6 @@ import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { ArrowRight, MoveRight, PawPrint } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
