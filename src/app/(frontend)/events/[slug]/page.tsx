@@ -1,6 +1,7 @@
-import Image from 'next/image'
+// src/app/(frontend)/events/[slug]/page.tsx
 import Link from 'next/link'
-import { ArrowLeft, MoreVertical } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
+import EventGalleryClient from '@/components/EventGalleryClient'
 import { getEvents } from '@/libs/server'
 import { notFound } from 'next/navigation'
 
@@ -11,20 +12,20 @@ interface EventGalleryPageProps {
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
   const { slug } = params
 
+  // Server-side fetch
   const events: EventItem[] = await getEvents()
 
+  // Group events
   const groupedEvents: Record<string, { date: string; photos: string[] }> = {}
   for (const event of events) {
     if (!groupedEvents[event.title]) {
-      groupedEvents[event.title] = {
-        date: event.date,
-        photos: [],
-      }
+      groupedEvents[event.title] = { date: event.date, photos: [] }
     }
-    const urls = event.photos?.map((photo) => photo.url) ?? []
+    const urls = event.photos?.map((p) => p.url) ?? []
     groupedEvents[event.title].photos.push(...urls)
   }
 
+  // Find the event by slug
   const eventEntry = Object.entries(groupedEvents).find(
     ([title]) =>
       title
@@ -33,9 +34,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
         .replace(/[^a-z0-9-]/g, '') === slug,
   )
 
-  if (!eventEntry) {
-    notFound()
-  }
+  if (!eventEntry) notFound()
 
   const [title, { date, photos }] = eventEntry
 
@@ -58,41 +57,9 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
           </div>
         </div>
       </div>
-      {/* Gallery */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
-          {photos.map((url, idx) => {
-            const heights = ['h-48', 'h-64', 'h-80', 'h-56', 'h-72', 'h-60']
-            const randomHeight = heights[idx % heights.length]
 
-            return (
-              <div
-                key={idx}
-                className={`relative ${randomHeight} break-inside-avoid mb-4 cursor-pointer group rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300`}
-              >
-                <Image
-                  src={url || '/placeholder.svg'}
-                  alt={`${title} photo ${idx + 1}`}
-                  fill
-                  priority={idx < 8}
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                />
-
-                {/* Optional: Add subtle overlay on hover */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Empty state */}
-        {photos.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">No photos available for this event.</p>
-          </div>
-        )}
-      </div>
+      {/* Client-side gallery with original layout */}
+      <EventGalleryClient title={title} date={date} photos={photos} />
     </div>
   )
 }
