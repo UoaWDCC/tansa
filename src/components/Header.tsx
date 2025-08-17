@@ -1,12 +1,15 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { ArrowRight, MoveRight, PawPrint } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
   const pathname = usePathname()
+  const router = useRouter()
+  const [loadingPath, setLoadingPath] = useState<string | null>(null)
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -15,6 +18,18 @@ const Header = () => {
     { href: '/sponsors', label: 'Sponsors' },
     { href: '/contact', label: 'Contact' },
   ]
+
+  const handleClick = (href: string) => {
+    if (pathname !== href) {
+      setLoadingPath(href)
+      router.push(href)
+    }
+  }
+
+  // Reset loading state when route changes
+  useEffect(() => {
+    setLoadingPath(null)
+  }, [pathname])
 
   return (
     <header className="sticky top-0 z-50 px-4 py-4 bg-tansa-blue">

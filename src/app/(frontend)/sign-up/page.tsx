@@ -1,5 +1,6 @@
 import { StripeCheckoutForm } from '@/components/registration-form/RegistrationForm'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Image from 'next/image'
 import React from 'react'
 
 const page = () => {
@@ -10,6 +11,16 @@ const page = () => {
         <p className="text-lg md:text-2xl text-white z-10">
           Join TANSA this year and get access to exclusive events, deals, and a vibrant community!
         </p>
+         {/* Bear image */}
+        <div className="absolute right-0 bottom-[-190px] select-none">
+          <Image
+            src="/bears/hooray 1.svg"
+            alt="Bear"
+            width={450}
+            height={450}
+            className="object-contain"
+          />
+        </div>
       </div>
       <div className="min-h-screen flex items-center justify-center p-4">
         <div className="w-3xl p-6 flex gap-8">

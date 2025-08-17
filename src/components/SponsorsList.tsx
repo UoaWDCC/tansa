@@ -28,7 +28,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         />
       </div>
 
-      <div className="flex flex-wrap justify-center gap-7 mx-20">
+      <div className="flex flex-wrap justify-start max-w-7xl w-full gap-4 mx-auto">
         {filteredSponsors.length === 0 ? (
           <div className="w-full text-center text-red-500">No sponsors found.</div>
         ) : (
@@ -49,7 +49,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
             )
 
             return (
-              <div key={id} className="flex flex-col items-center justify-center w-full max-w-36">
+              <div key={id} className="flex flex-col items-center justify-center w-full max-w-25">
                 <div className="relative group w-full flex justify-center items-center">
                   {instagram ? (
                     <a href={instagram} target="_blank" rel="noopener noreferrer" className="block">

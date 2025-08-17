@@ -17,6 +17,15 @@ type EventItem = {
   photos?: MediaItem[]
 }
 
+type ExecMember = {
+  id: number
+  name: string
+  position: string
+  degree: string
+  category: string
+  profileImage?: MediaItem
+}
+
 // Website Types
 type EventSectionProps = {
   title: string
