@@ -60,7 +60,7 @@ export default async function AboutPage() {
                     {member.name}
                   </p>
                   <p className="text-center text-base text-tansa-blue font-newkansas">
-                    {member.position}
+                    {member.degree}
                   </p>
                 </div>
               ))}

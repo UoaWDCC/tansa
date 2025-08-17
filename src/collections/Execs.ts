@@ -31,12 +31,14 @@ export const Exec: CollectionConfig = {
       options: [
         'Presidents',
         'Admin',
+        'Taiwanese Rep',
         'Marketing',
         'Activities',
         'AESIR',
         'Public Relations Officer',
         'Design',
         'Photography',
+        'Videographer'
       ],
       label: 'Category Text',
     },
