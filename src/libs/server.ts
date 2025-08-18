@@ -8,7 +8,7 @@ export async function getMediaPhotos(): Promise<MediaItem[]> {
   // Fetch media photos with a limit of 12
   const mediaPhotos = await client.find({
     collection: 'media', // Collection name
-    limit: 12, // Limit to 12 items
+    limit: 100, // Limit to 12 items
   })
 
   // Return the fetched media photos as MediaItem[] array
@@ -21,7 +21,7 @@ export async function getEvents(): Promise<EventItem[]> {
 
   const events = await client.find({
     collection: 'events',
-    limit: 10,
+    limit: 100,
   })
 
   return events.docs as EventItem[]

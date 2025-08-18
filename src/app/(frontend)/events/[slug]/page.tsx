@@ -37,6 +37,11 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
   if (!eventEntry) notFound()
 
   const [title, { date, photos }] = eventEntry
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   return (
     <div className="min-h-screen bg-tansa-cream">
@@ -52,14 +57,14 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
           </Link>
           <div className="text-tansa-cream">
             <h1 className="text-4xl md:text-5xl font-bold font-newkansas mb-2">{title}</h1>
-            <p className="text-lg opacity-90">{date}</p>
+            <p className="text-lg opacity-90">{formattedDate}</p>
             <p className="text-sm opacity-75 mt-2">{photos.length} photos</p>
           </div>
         </div>
       </div>
 
       {/* Client-side gallery with original layout */}
-      <EventGalleryClient title={title} date={date} photos={photos} />
+      <EventGalleryClient title={title} date={formattedDate} photos={photos} />
     </div>
   )
 }
