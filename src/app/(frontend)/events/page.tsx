@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import EventCard from '@/components/EventCard'
+import EventCard from '@/components/events/EventCard'
 import { getEvents } from '@/libs/server'
 
 export default async function PastEventsPage() {

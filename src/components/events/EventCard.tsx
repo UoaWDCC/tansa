@@ -6,6 +6,7 @@ import { useState } from 'react'
 interface EventCardProps {
   title: string
   date: string
+
   photoUrls: string[]
   slug: string
 }
@@ -26,7 +27,7 @@ export default function EventCard({ title, date, photoUrls, slug }: EventCardPro
       className="group cursor-pointer"
       onClick={() => setIsLoading(true)} // show spinner when clicked
     >
-      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative">
+      <div className="bg-white rounded-2xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 relative">
         {/* Cover Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
           <Image
