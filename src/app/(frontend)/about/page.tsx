@@ -1,22 +1,42 @@
+import { Suspense } from 'react'
 import { getExecMembers } from '@/libs/server'
 import Image from 'next/image'
+import TeamSection from '@/components/team/TeamSection'
+import TeamSkeleton from '@/components/team/TeamSkeleton'
+import { ErrorBoundary } from '@/components/events/ErrorBoundary'
 
-export default async function AboutPage() {
-  const exec = await getExecMembers()
+function processTeamCategories(exec: Awaited<ReturnType<typeof getExecMembers>>) {
+  const categoryMap = new Map<string, typeof exec>()
 
-  const categories = [
-    { title: 'Presidents', members: exec.filter((m) => m.category === 'Presidents') },
-    { title: 'Admin', members: exec.filter((m) => m.category === 'Admin') },
-    { title: 'Marketing', members: exec.filter((m) => m.category === 'Marketing') },
-    { title: 'Activities', members: exec.filter((m) => m.category === 'Activities') },
-    { title: 'AESIR', members: exec.filter((m) => m.category === 'AESIR') },
-    {
-      title: 'Public Relations Officer',
-      members: exec.filter((m) => m.category === 'Public Relations Officer'),
-    },
-    { title: 'Design', members: exec.filter((m) => m.category === 'Design') },
-    { title: 'Photography', members: exec.filter((m) => m.category === 'Photography') },
+  // Group members by category efficiently
+  exec.forEach((member) => {
+    const existing = categoryMap.get(member.category) || []
+    categoryMap.set(member.category, [...existing, member])
+  })
+
+  // Define category order
+  const categoryOrder = [
+    'Presidents',
+    'Admin',
+    'Marketing',
+    'Activities',
+    'AESIR',
+    'Public Relations Officer',
+    'Design',
+    'Photography',
   ]
+
+  return categoryOrder
+    .map((title) => ({
+      title,
+      members: categoryMap.get(title) || [],
+    }))
+    .filter(({ members }) => members.length > 0)
+}
+
+async function TeamContent() {
+  const exec = await getExecMembers()
+  const categories = processTeamCategories(exec)
 
   return (
     <div className="bg-tansa-blue">
@@ -33,42 +53,25 @@ export default async function AboutPage() {
               width={400}
               height={400}
               className="object-contain"
+              priority
             />
           </div>
         </div>
       </div>
-      {/* TEAM SECTIONS */}
-      {categories
-        .filter(({ members }) => members.length > 0)
-        .map(({ title, members }) => (
-          <div key={title} className="bg-tansa-cream">
-            <div className="container mx-auto px-4 pt-12 text-center">
-              <h1 className="text-3xl text-tansa-blue font-newkansas">{title}</h1>
-            </div>
-            <div className="mx-auto flex flex-wrap justify-center gap-10 pt-6 pb-6">
-              {members.map((member) => (
-                <div key={member.id} className="flex flex-col items-center w-[250px] min-h-[350px]">
-                  <Image
-                    src={member.profileImage?.url || '/placeholder.svg'}
-                    alt={member.name}
-                    width={250}
-                    height={250}
-                    className="rounded-md object-cover h-[250px] w-[250px]"
-                  />
-                  <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">
-                    {member.name}
-                  </p>
-                  <p className="text-center text-base text-tansa-blue font-newkansas">
-                    {member.position}
-                  </p>
-                  <p className="text-center text-base text-tansa-blue font-newkansas">
-                    {member.degree}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+
+      {categories.map(({ title, members }, index) => (
+        <TeamSection key={title} title={title} members={members} isFirst={index === 0} />
+      ))}
     </div>
+  )
+}
+
+export default function AboutPage() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<TeamSkeleton />}>
+        <TeamContent />
+      </Suspense>
+    </ErrorBoundary>
   )
 }
