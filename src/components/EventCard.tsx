@@ -14,6 +14,11 @@ export default function EventCard({ title, date, photoUrls, slug }: EventCardPro
   const [isLoading, setIsLoading] = useState(false)
   const coverImage = photoUrls[0] || '/placeholder-event.jpg' // Fallback image
   const photoCount = photoUrls.length
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   return (
     <Link
@@ -59,7 +64,7 @@ export default function EventCard({ title, date, photoUrls, slug }: EventCardPro
           <h3 className="font-bold text-lg text-tansa-blue font-newkansas line-clamp-2 group-hover:text-tansa-blue/80 transition-colors">
             {title}
           </h3>
-          <p className="text-sm text-gray-600 mt-1">{date}</p>
+          <p className="text-sm text-gray-600 mt-1">{formattedDate}</p>
         </div>
       </div>
     </Link>

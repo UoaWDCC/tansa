@@ -12,7 +12,8 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "stripe": "stripe listen --forward-to localhost:3000/api/webhook"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "latest",
@@ -24,6 +25,7 @@
     "@radix-ui/react-slot": "^1.2.2",
     "@stripe/react-stripe-js": "^3.9.0",
     "@stripe/stripe-js": "^7.8.0",
+    "@supabase/supabase-js": "^2.55.0",
     "@tailwindcss/postcss": "^4.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

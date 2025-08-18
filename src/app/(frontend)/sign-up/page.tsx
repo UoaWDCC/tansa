@@ -1,5 +1,5 @@
 import { StripeCheckoutForm } from '@/components/registration-form/RegistrationForm'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 import React from 'react'
 
