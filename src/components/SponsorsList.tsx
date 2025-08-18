@@ -40,25 +40,30 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
             const imageAlt = name || 'Sponsor Logo'
 
             const imageElement = (
-              <>
+              <div className="relative group w-full flex justify-center items-center select-none">
                 <Image src={imageSrc} alt={imageAlt} width={200} height={200} className="rounded" />
-                <div className="absolute inset-0 bg-gray-800 bg-opacity-50 opacity-0 group-hover:opacity-90 flex items-center justify-center transition-opacity duration-200 rounded">
-                  <span className="text-white text-center text-xs px-2">{sponsorshipDetails}</span>
-                </div>
-              </>
+
+                {/* Hover popup */}
+                {sponsorshipDetails && (
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-60 bg-white text-black p-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-center text-sm z-10 select-none pointer-events-none group-hover:pointer-events-auto">
+                    <h3 className="font-bold mb-1">{name}</h3>
+                    <p>{sponsorshipDetails}</p>
+                  </div>
+                )}
+
+                {/* Optional semi-transparent overlay on hover */}
+              </div>
             )
 
             return (
               <div key={id} className="flex flex-col items-center justify-center w-full max-w-25">
-                <div className="relative group w-full flex justify-center items-center">
-                  {instagram ? (
-                    <a href={instagram} target="_blank" rel="noopener noreferrer" className="block">
-                      {imageElement}
-                    </a>
-                  ) : (
-                    <div className="block">{imageElement}</div>
-                  )}
-                </div>
+                {instagram ? (
+                  <a href={instagram} target="_blank" rel="noopener noreferrer" className="block">
+                    {imageElement}
+                  </a>
+                ) : (
+                  <div className="block">{imageElement}</div>
+                )}
               </div>
             )
           })
