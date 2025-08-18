@@ -1,43 +1,60 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useMemo, memo } from 'react'
 
 interface EventCardProps {
   title: string
   date: string
-
   photoUrls: string[]
   slug: string
+  priority?: boolean // Added priority prop for above-fold images
 }
 
-export default function EventCard({ title, date, photoUrls, slug }: EventCardProps) {
+function EventCard({ title, date, photoUrls, slug, priority = false }: EventCardProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const coverImage = photoUrls[0] || '/placeholder-event.jpg' // Fallback image
-  const photoCount = photoUrls.length
-  const formattedDate = new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const [imageLoaded, setImageLoaded] = useState(false) // Track image load state
+
+  const { coverImage, photoCount, formattedDate } = useMemo(
+    () => ({
+      coverImage: photoUrls[0] || '/placeholder-event.jpg',
+      photoCount: photoUrls.length,
+      formattedDate: new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+    }),
+    [photoUrls, date],
+  )
 
   return (
     <Link
       href={`/events/${slug}`}
       className="group cursor-pointer"
-      onClick={() => setIsLoading(true)} // show spinner when clicked
+      onClick={() => setIsLoading(true)}
     >
       <div className="bg-white rounded-2xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 relative">
         {/* Cover Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+              <div className="w-12 h-12 bg-gray-300 rounded-full animate-pulse"></div>
+            </div>
+          )}
+
           <Image
-            src={coverImage}
+            src={coverImage || '/placeholder.svg'}
             alt={`${title} cover`}
             fill
-            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
+            className={`object-cover group-hover:scale-105 transition-all duration-300 ${
               isLoading ? 'opacity-50' : ''
-            }`}
+            } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} // Smooth fade-in when loaded
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            priority={priority} // Use priority for above-fold images
+            placeholder="blur" // Add blur placeholder
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            onLoad={() => setImageLoaded(true)} // Track when image loads
           />
 
           {/* Photo count overlay */}
@@ -71,3 +88,5 @@ export default function EventCard({ title, date, photoUrls, slug }: EventCardPro
     </Link>
   )
 }
+
+export default memo(EventCard)

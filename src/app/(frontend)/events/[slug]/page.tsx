@@ -56,7 +56,7 @@ export default async function EventGalleryPage({ params }: EventGalleryPageProps
             Back to Past Events
           </Link>
           <div className="text-tansa-cream">
-            <h1 className="text-4xl md:text-5xl font-bold font-newkansas mb-2">{title}</h1>
+            <h1 className="text-6xl md:text-5xl font-bold font-newkansas mb-2">{title}</h1>
             <p className="text-lg opacity-90">{formattedDate}</p>
             <p className="text-sm opacity-75 mt-2">{photos.length} photos</p>
           </div>

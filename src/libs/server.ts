@@ -21,7 +21,7 @@ export async function getEvents(): Promise<EventItem[]> {
 
   const events = await client.find({
     collection: 'events',
-    limit: 100,
+    limit: 20,
   })
 
   return events.docs as EventItem[]
