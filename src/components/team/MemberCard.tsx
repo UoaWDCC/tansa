@@ -34,10 +34,10 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
   return (
     <div
       ref={cardRef}
-      className="flex flex-col items-center w-[250px] min-h-[350px] transition-opacity duration-500"
+      className="flex flex-col items-center w-[clamp(150px,20vw,250px)] min-h-[clamp(220px,28vw,350px)] transition-opacity duration-500"
       style={{ opacity: isVisible ? 1 : 0 }}
     >
-      <div className="relative w-[250px] h-[250px] rounded-md overflow-hidden bg-gray-200">
+      <div className="relative w-full aspect-square rounded-md overflow-hidden bg-gray-200">
         {isVisible && (
           <Image
             src={
@@ -48,21 +48,21 @@ export default function MemberCard({ member, priority = false }: MemberCardProps
             width={250}
             height={250}
             priority={priority}
-            className={`rounded-md object-cover h-[250px] w-[250px] transition-opacity duration-300 ${
+            className={`rounded-md object-cover w-full h-full transition-opacity duration-300 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             onLoad={() => setImageLoaded(true)}
             placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            blurDataURL="data:image/jpeg;base64,..."
           />
         )}
         {!imageLoaded && isVisible && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" />
         )}
       </div>
-      <p className="mt-2 text-center text-2xl text-tansa-blue font-newkansas">{member.name}</p>
-      <p className="text-center text-base text-tansa-blue font-newkansas">{member.position}</p>
-      <p className="text-center text-base text-tansa-blue font-newkansas">{member.degree}</p>
+      <p className="mt-2 text-center text-[clamp(1rem,2vw,1.5rem)] text-tansa-blue font-newkansas">{member.name}</p>
+      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-newkansas">{member.position}</p>
+      <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-newkansas">{member.degree}</p>
     </div>
   )
 }
