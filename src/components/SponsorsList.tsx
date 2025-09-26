@@ -16,8 +16,8 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
   )
 
   return (
-    <div className="mt-15 bg-tansa-cream">
-      <div className="max-w-6xl mx-auto px-4 pb-8">
+    <div className="sm:pl-20 sm:pr-20 mt-15 bg-tansa-cream">
+      <div className="max-w-6xl mx-auto px-10 md:px-4 pb-8">
         <input
           type="text"
           placeholder="Search sponsors..."
@@ -28,7 +28,7 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
         />
       </div>
 
-      <div className="flex flex-wrap justify-start max-w-7xl w-full gap-4 mx-auto">
+      <div className="flex flex-wrap text-center content-center justify-center items-center  max-w-7xl w-full gap-4 mx-auto">
         {filteredSponsors.length === 0 ? (
           <div className="w-full text-center text-red-500">No sponsors found.</div>
         ) : (
