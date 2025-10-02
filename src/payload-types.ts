@@ -275,7 +275,8 @@ export interface Exec {
     | 'AESIR'
     | 'Public Relations Officer'
     | 'Design'
-    | 'Photography';
+    | 'Photography'
+    | 'Interns';
   profileImage?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;

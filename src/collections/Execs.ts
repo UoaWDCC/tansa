@@ -37,6 +37,7 @@ export const Exec: CollectionConfig = {
         'Public Relations Officer',
         'Design',
         'Photography',
+        'Interns'
       ],
       label: 'Category Text',
     },
