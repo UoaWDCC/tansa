@@ -58,6 +58,8 @@ export default function PastEventsPage() {
             height={450}
             className="object-contain"
             priority // Prioritize header image
+            quality={50} // Lower quality for smaller file size
+
           />
         </div>
       </div>

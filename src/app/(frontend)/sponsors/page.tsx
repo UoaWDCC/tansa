@@ -24,6 +24,7 @@ export default async function SponsorsPage() {
               width={450}
               height={450}
               className="object-contain"
+              quality={25} // Lower quality for smaller file size
             />
           </div>
         </div>
@@ -36,11 +37,12 @@ export default async function SponsorsPage() {
       <div className="flex justify-center m-15 mx-auto">
         <iframe
           src="https://www.google.com/maps/d/embed?mid=1xX0X1w1pNLM0xoZjKMIOh_6y0CxNEiY&ehbc=2E312F"
-          width="640"
-          height="480"
+          width="1040"
+          height="1040"
           title="Sponsors Map"
           className="border-0"
           loading="lazy"
+
         />
       </div>
     </div>
