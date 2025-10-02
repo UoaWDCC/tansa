@@ -1,71 +1,87 @@
+import { Suspense } from 'react'
 import { getExecMembers } from '@/libs/server'
 import Image from 'next/image'
+import TeamSection from '@/components/team/TeamSection'
+import TeamSkeleton from '@/components/team/TeamSkeleton'
+import { ErrorBoundary } from '@/components/events/ErrorBoundary'
 
-export default async function AboutPage() {
-  const exec = await getExecMembers()
+function processTeamCategories(exec: Awaited<ReturnType<typeof getExecMembers>>) {
+  const categoryMap = new Map<string, typeof exec>()
 
-  const categories = [
-    { title: 'Presidents', members: exec.filter((m) => m.category === 'Presidents') },
-    { title: 'Admin', members: exec.filter((m) => m.category === 'Admin') },
-    { title: 'Marketing', members: exec.filter((m) => m.category === 'Marketing') },
-    { title: 'Activities', members: exec.filter((m) => m.category === 'Activities') },
-    { title: 'AESIR', members: exec.filter((m) => m.category === 'AESIR') },
-    {
-      title: 'Public Relations Officer',
-      members: exec.filter((m) => m.category === 'Public Relations Officer'),
-    },
-    { title: 'Design', members: exec.filter((m) => m.category === 'Design') },
-    { title: 'Photography', members: exec.filter((m) => m.category === 'Photography') },
+  // Group members by category efficiently
+  exec.forEach((member) => {
+    const existing = categoryMap.get(member.category) || []
+    categoryMap.set(member.category, [...existing, member])
+  })
+
+  // Define category order
+  const categoryOrder = [
+    'Presidents',
+    'Admin',
+    'Marketing',
+    'Activities',
+    'AESIR',
+    'Public Relations Officer',
+    'Design',
+    'Photography',
   ]
+
+  return categoryOrder
+    .map((title) => ({
+      title,
+      members: categoryMap.get(title) || [],
+    }))
+    .filter(({ members }) => members.length > 0)
+}
+
+async function TeamContent() {
+  const exec = await getExecMembers()
+  const categories = processTeamCategories(exec)
 
   return (
     <div className="bg-tansa-blue">
       <div className="bg-tansa-blue overflow-hidden">
-        <div className="max-w-6xl relative mx-auto flex items-center justify-between py-[clamp(2rem,6vw,4rem)] h-[clamp(180px,30vw,300px)]">
-          <div>
-            <h1 className="text-[clamp(2rem,4vw,3.75rem)] text-tansa-cream font-newkansas">Meet our</h1>
-            <h1 className="text-[clamp(3rem,6vw,5.5rem)] text-tansa-cream font-newkansas">Team!</h1>
+        {/* HERO SECTION - stays like original */}
+        <div className="max-w-6xl relative mx-auto flex items-center justify-between 
+                py-[clamp(2.5rem,6vw,4.5rem)] h-[clamp(240px,35vw,320px)] lg:h-[300px] lg:py-16">
+          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0">
+            {/* Text scales on small screens, fixed look on large screens */}
+            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-newkansas">
+              Meet our
+            </h1>
+            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-white font-newkansas mt-0 sm:mt-4 lg:mt-0">
+              Team!
+            </h1>
           </div>
-          <div className="w-[clamp(200px,30vw,400px)] bottom-[-10%] absolute right-0 select-none">
+
+          {/* Bear scales on small screens, fixed position/size on large screens */}
+          <div className="w-[clamp(220px,35vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-50px] lg:bottom-[-70px] select-none">
             <Image
               src="/bears/lying_on_stomach.svg"
               alt="bear lying on stomach"
               width={400}
               height={400}
               className="object-contain w-full h-auto"
+              priority
             />
           </div>
         </div>
       </div>
-      {/* TEAM SECTIONS */}
-      {categories
-        .filter(({ members }) => members.length > 0)
-        .map(({ title, members }) => (
-          <div key={title} className="bg-tansa-cream">
-            <div className="container mx-auto px-4 pt-12 text-center">
-              <h1 className="text-[clamp(1.5rem,3vw,2rem)] text-tansa-blue font-newkansas">{title}</h1>
-            </div>
-            <div className="mx-auto flex flex-wrap justify-center gap-[clamp(1rem,3vw,2.5rem)] pt-6 pb-6">
-              {members.map((member) => (
-                <div key={member.id} className="flex flex-col items-center w-[clamp(150px,20vw,250px)] min-h-[clamp(220px,28vw,350px)]">
-                  <Image
-                    src={member.profileImage?.url || '/placeholder.svg'}
-                    alt={member.name}
-                    width={250}
-                    height={250}
-                    className="rounded-md object-cover w-full h-auto aspect-square"
-                  />
-                  <p className="mt-2 text-center text-[clamp(1rem,2vw,1.5rem)] text-tansa-blue font-newkansas">
-                    {member.name}
-                  </p>
-                  <p className="text-center text-[clamp(0.8rem,1.5vw,1rem)] text-tansa-blue font-newkansas">
-                    {member.position}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+
+      {/* TEAM SECTIONS - responsive improvements preserved */}
+      {categories.map(({ title, members }, index) => (
+        <TeamSection key={title} title={title} members={members} isFirst={index === 0} />
+      ))}
     </div>
+  )
+}
+
+export default function AboutPage() {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<TeamSkeleton />}>
+        <TeamContent />
+      </Suspense>
+    </ErrorBoundary>
   )
 }
