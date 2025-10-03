@@ -24,6 +24,7 @@ function processTeamCategories(exec: Awaited<ReturnType<typeof getExecMembers>>)
     'Public Relations Officer',
     'Design',
     'Photography',
+    'Interns'
   ]
 
   return categoryOrder
