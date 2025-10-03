@@ -23,6 +23,7 @@ export default async function SponsorsPage() {
               alt="Bear"
               width={450}
               height={450}
+              quality={50}
               className="object-contain"
             />
           </div>

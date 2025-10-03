@@ -177,14 +177,12 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    if (!stripe || !elements) {
-      return
-    }
+    if (!stripe || !elements) return
 
     setIsLoading(true)
     setMessage('')
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/success`,
@@ -193,10 +191,38 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
     })
 
     if (error) {
-      if (error.type === 'card_error' || error.type === 'validation_error') {
-        setMessage(error.message || 'An error occurred')
-      } else {
-        setMessage('An unexpected error occurred.')
+      setMessage(error.message || 'An unexpected error occurred.')
+      setIsLoading(false)
+      return
+    }
+
+    if (paymentIntent?.status === 'succeeded') {
+      // Payment successful — create user
+      try {
+        const res = await fetch('/api/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            firstName,
+            lastName,
+            phoneNumber,
+            gender,
+            ethnicity,
+            universityId,
+            upi,
+            areaOfStudy,
+            yearLevel,
+          }),
+        })
+        const data = await res.json()
+        if (!data.success) {
+          console.error('User creation failed:', data.error)
+        } else {
+          console.log('User created successfully:', data.user)
+        }
+      } catch (err) {
+        console.error('Error creating user:', err)
       }
     }
 

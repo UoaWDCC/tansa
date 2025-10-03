@@ -40,9 +40,15 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
             const imageAlt = name || 'Sponsor Logo'
 
             const imageElement = (
-              <div className="relative group w-full flex justify-center items-center select-none">
-                <Image src={imageSrc} alt={imageAlt} width={200} height={200} className="rounded" />
-
+              <div className="relative group bg-white rounded-lg shadow-sm flex items-center justify-center w-[100px] h-[100px]">
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={100}
+                  height={100}
+                  className="object-contain max-w-[80px] max-h-[80px]"
+                />
+            
                 {/* Hover popup */}
                 {sponsorshipDetails && (
                   <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-60 bg-white text-black p-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-center text-sm z-10 select-none pointer-events-none group-hover:pointer-events-auto">
@@ -50,10 +56,9 @@ export default function SponsorsList({ sponsors }: SponsorsListProps) {
                     <p>{sponsorshipDetails}</p>
                   </div>
                 )}
-
-                {/* Optional semi-transparent overlay on hover */}
               </div>
             )
+            
 
             return (
               <div key={id} className="flex flex-col items-center justify-center w-full max-w-25">
