@@ -42,24 +42,34 @@ async function TeamContent() {
   return (
     <div className="bg-tansa-blue">
       <div className="bg-tansa-blue overflow-hidden">
-        <div className="max-w-6xl h-[300px] relative mx-auto flex items-center justify-between py-16">
-          <div>
-            <h1 className="text-6xl text-white font-newkansas">Meet our</h1>
-            <h1 className="text-8xl text-white font-newkansas">Team!</h1>
+        {/* HERO SECTION - stays like original */}
+        <div className="max-w-6xl relative mx-auto flex items-center justify-between 
+                py-[clamp(2.5rem,6vw,4.5rem)] h-[clamp(240px,35vw,320px)] lg:h-[300px] lg:py-16">
+          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0">
+            {/* Text scales on small screens, fixed look on large screens */}
+            <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-newkansas">
+              Meet our
+            </h1>
+            <h1 className="text-[clamp(3.5rem,9vw,6rem)] sm:text-[clamp(4rem,10vw,6.5rem)] lg:text-8xl text-white font-newkansas mt-0 sm:mt-4 lg:mt-0">
+              Team!
+            </h1>
           </div>
-          <div className="w-[400px] bottom-[-70px] absolute right-0 select-none">
+
+          {/* Bear scales on small screens, fixed position/size on large screens */}
+          <div className="w-[clamp(220px,35vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-50px] lg:bottom-[-70px] select-none">
             <Image
               src="/bears/lying_on_stomach.svg"
               alt="bear lying on stomach"
               width={400}
               height={400}
-              className="object-contain"
+              className="object-contain w-full h-auto"
               priority
             />
           </div>
         </div>
       </div>
 
+      {/* TEAM SECTIONS - responsive improvements preserved */}
       {categories.map(({ title, members }, index) => (
         <TeamSection key={title} title={title} members={members} isFirst={index === 0} />
       ))}
