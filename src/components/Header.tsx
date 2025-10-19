@@ -2,13 +2,14 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight, MoveRight, PawPrint } from 'lucide-react'
+import { ArrowRight, MoveRight, PawPrint, Menu, X} from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
   const pathname = usePathname()
   const router = useRouter()
   const [loadingPath, setLoadingPath] = useState<string | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -22,6 +23,7 @@ const Header = () => {
     if (pathname !== href) {
       setLoadingPath(href)
       router.push(href)
+      setMenuOpen(false)
     }
   }
 
@@ -89,7 +91,7 @@ const Header = () => {
 
         {/* Right Side Elements */}
         <div className="flex-1 flex justify-end">
-          <div className="flex items-center space-x-4">
+          <div className="hidden md:flex flex items-center space-x-4">
             {/* Snowflake Icon */}
             <Link
               href="https://linktr.ee/tansa.ausa"
@@ -115,6 +117,13 @@ const Header = () => {
               </span>
             </Link>
           </div>
+          {/* Hamburger Icon (Mobile) */}
+          <button
+            className="md:hidden text-tansa-cream focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+          </button>
         </div>
       </div>
     </header>
