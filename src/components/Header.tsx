@@ -92,7 +92,7 @@ const Header = () => {
         {/* Right Side Elements */}
         <div className="flex-1 flex justify-end">
           <div className="hidden md:flex flex items-center space-x-4">
-            {/* Snowflake Icon */}
+            {/* Snowflake Icon (Desktop) */}
             <Link
               href="https://linktr.ee/tansa.ausa"
               target="blank"
@@ -101,7 +101,7 @@ const Header = () => {
               <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
             </Link>
 
-            {/* Join Us Button */}
+            {/* Join Us Button (Desktop) */}
             <Link
               href="/sign-up"
               className="bg-tansa-cream text-tansa-blue px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
@@ -125,6 +125,47 @@ const Header = () => {
             {menuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
           </button>
         </div>
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8">
+            {/* X Button inside dropdown */}
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-8 right-6 text-tansa-blue hover:text-white transition font-extrabold"
+            >
+              <X className="h-8 w-8" />
+            </button>
+
+            {/* Mobile logo and title */}
+            <div className="flex items-center space-x-2 mb-8">
+              <Image
+                src="/TANSA-LOGO.svg"
+                alt="TANSA bear logo"
+                width={40}
+                height={40}
+              />
+              <h1 className="text-sm font-semibold text-tansa-blue">
+                Taiwanese and New Zealand<br />Students' Association
+              </h1>
+            </div>
+
+            <ul className="flex flex-col items-start space-y-6 text-lg font-semibold">
+              {/* Links */}
+              <Link href="/about" className="text-lg text-tansa-blue">
+                About Us
+              </Link>
+              <Link href="/events" className="text-lg text-tansa-blue">
+                Events
+              </Link>
+              <Link href="/sponsors" className="text-lg text-tansa-blue">
+                Sponsors
+              </Link>
+              <Link href="/contact" className="text-lg text-tansa-blue">
+                Contact
+              </Link>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   )
