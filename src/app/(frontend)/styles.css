@@ -134,3 +134,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes dropdown-slide {
+  0% {
+    opacity: 1;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dropdown-slide {
+  animation: dropdown-slide 0.7s ease-out forwards;
+}

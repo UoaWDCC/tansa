@@ -141,7 +141,8 @@ const Header = () => {
         </div>
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8">
+          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8 transform transition-all duration-500 ease-out
+               animate-dropdown-slide">
             {/* X Button inside dropdown */}
             <button
               onClick={() => setMenuOpen(false)}
