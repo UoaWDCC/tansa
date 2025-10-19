@@ -130,7 +130,7 @@ const Header = () => {
             </Link>
           </div>
           {/* Mobile Hamburger */}
-          <div className="md:hidden ml-2">
+          <div className="md:hidden ml-2 pt-5 pb-11 pr-2">
             <button
               className="text-tansa-cream focus:outline-none"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -163,20 +163,20 @@ const Header = () => {
               </h1>
             </div>
 
-            <ul className="flex flex-col items-start space-y-6 text-lg font-semibold">
+            <ul className="flex flex-col items-start space-y-6 text-lg text-tansa-blue font-semibold">
               {/* Links */}
-              <Link href="/about" className="text-lg text-tansa-blue">
-                About Us
-              </Link>
-              <Link href="/events" className="text-lg text-tansa-blue">
-                Events
-              </Link>
-              <Link href="/sponsors" className="text-lg text-tansa-blue">
-                Sponsors
-              </Link>
-              <Link href="/contact" className="text-lg text-tansa-blue">
-                Contact
-              </Link>
+              {navItems
+                .filter((item) => item.href !== '/') // skip Home
+                .map((item) => (
+                  <li key={item.href}>
+                    <button
+                      onClick={() => handleClick(item.href)}
+                      className="text-lg text-tansa-blue"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
             </ul>
           </div>
         )}
