@@ -37,7 +37,8 @@ const Header = () => {
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
-          <div className="flex items-center space-x-6 group">
+          {/*Desktop Logo*/}
+          <div className="hidden md:flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <Image
                 src="/TANSA-LOGO.svg"
@@ -57,6 +58,18 @@ const Header = () => {
               </h2>
             </div>
           </div>
+          {/*Mobile Logo*/}
+          <div className="flex md:hidden items-center space-x-2 mb-8 py-2">
+              <Image
+                src="/TANSA-LOGO.svg"
+                alt="TANSA bear logo"
+                width={40}
+                height={40}
+              />
+              <h1 className="text-sm font-semibold text-tansa-cream">
+                Taiwanese and New Zealand<br />Students' Association
+              </h1>
+            </div>
         </Link>
 
         {/* Navigation */}
@@ -89,19 +102,18 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Right Side Elements */}
-        <div className="flex-1 flex justify-end">
-          <div className="hidden md:flex flex items-center space-x-4">
-            {/* Snowflake Icon (Desktop) */}
+        {/* Right Side Elements*/}
+        <div className="flex items-center">
+          {/* Desktop Right Side */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://linktr.ee/tansa.ausa"
-              target="blank"
+              target="_blank"
               className="text-white transition-all duration-300 hover:scale-110"
             >
               <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
             </Link>
 
-            {/* Join Us Button (Desktop) */}
             <Link
               href="/sign-up"
               className="bg-tansa-cream text-tansa-blue px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
@@ -117,13 +129,15 @@ const Header = () => {
               </span>
             </Link>
           </div>
-          {/* Hamburger Icon (Mobile) */}
-          <button
-            className="md:hidden text-tansa-cream focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
-          </button>
+          {/* Mobile Hamburger */}
+          <div className="md:hidden ml-2">
+            <button
+              className="text-tansa-cream focus:outline-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X className="h-8 w-8 font-extrabold" /> : <Menu className="h-8 w-8" />}
+            </button>
+          </div>
         </div>
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
@@ -136,7 +150,7 @@ const Header = () => {
               <X className="h-8 w-8" />
             </button>
 
-            {/* Mobile logo and title */}
+            {/* Mobile Logo */}
             <div className="flex items-center space-x-2 mb-8">
               <Image
                 src="/TANSA-LOGO.svg"
