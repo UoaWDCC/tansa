@@ -134,3 +134,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hamburger-line {
+  @apply block h-[3px] w-full bg-tansa-cream rounded transition-all duration-300 ease-out;
+}
+
+/* Transform animation when menu is open */
+.open .hamburger-line:nth-child(1) {
+  @apply translate-y-2 rotate-45;
+}
+
+.open .hamburger-line:nth-child(2) {
+  @apply opacity-0;
+}
+
+.open .hamburger-line:nth-child(3) {
+  @apply -translate-y-2.5 -rotate-45;
+}
+
+/* Change to BLUE when open */
+.open .hamburger-line {
+  @apply bg-tansa-blue;
+}

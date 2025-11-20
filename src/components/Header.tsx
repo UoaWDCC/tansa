@@ -2,13 +2,14 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight, MoveRight, PawPrint } from 'lucide-react'
+import { ArrowRight, MoveRight, PawPrint, Menu, X} from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
   const pathname = usePathname()
   const router = useRouter()
   const [loadingPath, setLoadingPath] = useState<string | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -22,6 +23,7 @@ const Header = () => {
     if (pathname !== href) {
       setLoadingPath(href)
       router.push(href)
+      setMenuOpen(false)
     }
   }
 
@@ -31,11 +33,12 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-50 px-4 py-4 bg-tansa-blue">
+    <header className="sticky top-0 z-40 px-6 py-5 bg-tansa-blue">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
-          <div className="flex items-center space-x-6 group">
+          {/*Desktop Logo*/}
+          <div className="hidden md:flex items-center space-x-6 group">
             <div className="h-16 w-16 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
               <Image
                 src="/TANSA-LOGO.svg"
@@ -54,6 +57,18 @@ const Header = () => {
                 Students' Association
               </h2>
             </div>
+          </div>
+          {/*Mobile Logo*/}
+          <div className="flex items-center space-x-2 mb-8">
+              <Image
+                src="/TANSA-LOGO.svg"
+                alt="TANSA bear logo"
+                width={40}
+                height={40}
+              />
+              <h1 className="text-sm font-semibold text-tansa-cream">
+                Taiwanese and New Zealand<br />Students' Association
+              </h1>
           </div>
         </Link>
 
@@ -87,19 +102,18 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Right Side Elements */}
-        <div className="flex-1 flex justify-end">
-          <div className="flex items-center space-x-4">
-            {/* Snowflake Icon */}
+        {/* Right Side Elements*/}
+        <div className="flex items-center">
+          {/* Desktop Right Side */}
+          <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://linktr.ee/tansa.ausa"
-              target="blank"
+              target="_blank"
               className="text-white transition-all duration-300 hover:scale-110"
             >
               <Image src="/icons/linktree.svg" width={20} height={20} alt="LinkTree" />
             </Link>
 
-            {/* Join Us Button */}
             <Link
               href="/sign-up"
               className="bg-tansa-cream text-tansa-blue px-3 py-2 rounded-full font-bold transition-transform duration-200 group-hover:-translate-x-6 flex items-center group relative min-w-[110px]"
@@ -115,7 +129,54 @@ const Header = () => {
               </span>
             </Link>
           </div>
+          {/* Mobile Hamburger */}
+          <div className="md:hidden ml-2 pt-5 pb-11 pr-2 z-50 mx-auto">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`group flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none ${
+                menuOpen ? "open" : ""
+              }`}
+            >
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+            </button>
+          </div>
         </div>
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8 transform transition-all duration-500 ease-out">
+
+            {/* Mobile Logo */}
+            <div className="flex items-center space-x-2 mb-8">
+              <Image
+                src="/TANSA-LOGO.svg"
+                alt="TANSA bear logo"
+                width={40}
+                height={40}
+              />
+              <h1 className="text-sm font-semibold text-tansa-blue">
+                Taiwanese and New Zealand<br />Students' Association
+              </h1>
+            </div>
+
+            <ul className="flex flex-col items-start space-y-6 text-lg text-tansa-blue font-semibold">
+              {/* Links */}
+              {navItems
+                .filter((item) => item.href !== '/') // skip Home
+                .map((item) => (
+                  <li key={item.href}>
+                    <button
+                      onClick={() => handleClick(item.href)}
+                      className="text-lg text-tansa-blue"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   )
