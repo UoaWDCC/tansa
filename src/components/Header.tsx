@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight, MoveRight, PawPrint, Menu, X} from 'lucide-react'
+import { ArrowRight, MoveRight, PawPrint, Menu, X } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
@@ -17,6 +17,7 @@ const Header = () => {
     { href: '/events', label: 'Events' },
     { href: '/sponsors', label: 'Sponsors' },
     { href: '/contact', label: 'Contact' },
+    { href: '/sign-up', label: 'Sign Up' },
   ]
 
   const handleClick = (href: string) => {
@@ -33,7 +34,7 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 px-6 py-5 bg-tansa-blue">
+    <header className="sticky top-0 z-40 px-6 py-2 md:py-3 bg-tansa-blue">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
@@ -59,16 +60,13 @@ const Header = () => {
             </div>
           </div>
           {/*Mobile Logo*/}
-          <div className="flex items-center space-x-2 mb-8">
-              <Image
-                src="/TANSA-LOGO.svg"
-                alt="TANSA bear logo"
-                width={40}
-                height={40}
-              />
-              <h1 className="text-sm font-semibold text-tansa-cream">
-                Taiwanese and New Zealand<br />Students' Association
-              </h1>
+          <div className="md:hidden flex items-center space-x-2">
+            <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />
+            <h1 className="text-sm font-semibold text-tansa-cream">
+              Taiwanese and New Zealand
+              <br />
+              Students' Association
+            </h1>
           </div>
         </Link>
 
@@ -130,11 +128,11 @@ const Header = () => {
             </Link>
           </div>
           {/* Mobile Hamburger */}
-          <div className="md:hidden ml-2 pt-5 pb-11 pr-2 z-50 mx-auto">
+          <div className="md:hidden ml-2 z-50">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className={`group flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none ${
-                menuOpen ? "open" : ""
+                menuOpen ? 'open' : ''
               }`}
             >
               <span className="hamburger-line" />
@@ -145,22 +143,18 @@ const Header = () => {
         </div>
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8 transform transition-all duration-500 ease-out">
-
+          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 py-2 transform transition-all duration-500 ease-out">
             {/* Mobile Logo */}
-            <div className="flex items-center space-x-2 mb-8">
-              <Image
-                src="/TANSA-LOGO.svg"
-                alt="TANSA bear logo"
-                width={40}
-                height={40}
-              />
+            <div className="flex items-center space-x-2 mb-6">
+              <Image src="/TANSA-LOGO.svg" alt="TANSA bear logo" width={40} height={40} />
               <h1 className="text-sm font-semibold text-tansa-blue">
-                Taiwanese and New Zealand<br />Students' Association
+                Taiwanese and New Zealand
+                <br />
+                Students' Association
               </h1>
             </div>
 
-            <ul className="flex flex-col items-start space-y-6 text-lg text-tansa-blue font-semibold">
+            <ul className="flex flex-col items-start space-y-6 text-lg text-tansa-blue font-semibold pb-6">
               {/* Links */}
               {navItems
                 .filter((item) => item.href !== '/') // skip Home

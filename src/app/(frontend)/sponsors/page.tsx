@@ -11,7 +11,7 @@ export default async function SponsorsPage() {
     <div>
       <div className="bg-tansa-blue">
         {/* Header Section */}
-        <div className="max-w-6xl h-[300px] mx-auto flex items-center justify-between pt-16 relative overflow-clip">
+        <div className="max-w-6xl h-[200px] sm:h-[250px] md:h-[300px] mx-auto flex items-center justify-between pt-8 sm:pt-12 md:pt-16 relative overflow-clip">
           <div className="font-newkansas font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
             <h1>Our</h1>
             <h1>Sponsors</h1>
