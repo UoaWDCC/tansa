@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount } = await request.json()
+    const { amount, formData } = await request.json()
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
@@ -16,6 +16,16 @@ export async function POST(request: NextRequest) {
       },
       metadata: {
         type: 'signup',
+        firstName: formData?.firstName || '',
+        lastName: formData?.lastName || '',
+        email: formData?.email || '',
+        phoneNumber: formData?.phoneNumber || '',
+        gender: formData?.gender || '',
+        ethnicity: formData?.ethnicity || '',
+        universityId: formData?.universityId || '',
+        upi: formData?.upi || '',
+        areaOfStudy: formData?.areaOfStudy || '',
+        yearLevel: formData?.yearLevel || '',
       },
     })
 

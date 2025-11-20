@@ -156,23 +156,19 @@ function PaymentRequestForm({ clientSecret }: { clientSecret: string }) {
   return null
 }
 
-function CheckoutForm({ clientSecret }: { clientSecret: string }) {
+function CheckoutForm({
+  clientSecret,
+  formData,
+  onFormChange,
+}: {
+  clientSecret: string
+  formData: any
+  onFormChange: (field: string, value: string) => void
+}) {
   const stripe = useStripe()
   const elements = useElements()
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
-
-  // Form state variables
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [gender, setGender] = useState('')
-  const [ethnicity, setEthnicity] = useState('')
-  const [universityId, setUniversityId] = useState('')
-  const [upi, setUpi] = useState('')
-  const [areaOfStudy, setAreaOfStudy] = useState('')
-  const [yearLevel, setYearLevel] = useState('')
-  const [email, setEmail] = useState('')
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -182,51 +178,20 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
     setIsLoading(true)
     setMessage('')
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
+    const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/success`,
-        receipt_email: email,
+        receipt_email: formData.email,
       },
     })
 
     if (error) {
       setMessage(error.message || 'An unexpected error occurred.')
       setIsLoading(false)
-      return
     }
-
-    if (paymentIntent?.status === 'succeeded') {
-      // Payment successful — create user
-      try {
-        const res = await fetch('/api/users', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            firstName,
-            lastName,
-            phoneNumber,
-            gender,
-            ethnicity,
-            universityId,
-            upi,
-            areaOfStudy,
-            yearLevel,
-          }),
-        })
-        const data = await res.json()
-        if (!data.success) {
-          console.error('User creation failed:', data.error)
-        } else {
-          console.log('User created successfully:', data.user)
-        }
-      } catch (err) {
-        console.error('Error creating user:', err)
-      }
-    }
-
-    setIsLoading(false)
+    // Note: If payment succeeds, user will be redirected to success page
+    // The webhook will handle creating the registration record
   }
 
   return (
@@ -236,32 +201,32 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <RegistrationTextInput
             label="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={formData.firstName}
+            onChange={(e) => onFormChange('firstName', e.target.value)}
             placeholder="Enter your first name"
             required
           />
 
           <RegistrationTextInput
             label="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={formData.lastName}
+            onChange={(e) => onFormChange('lastName', e.target.value)}
             placeholder="Enter your last name"
             required
           />
 
           <RegistrationTextInput
             label="Phone Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={formData.phoneNumber}
+            onChange={(e) => onFormChange('phoneNumber', e.target.value)}
             placeholder="Enter your phone number"
             required
           />
 
           <RegistrationTextInput
             label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={(e) => onFormChange('email', e.target.value)}
             placeholder="Enter your email"
             type="email"
             required
@@ -269,8 +234,8 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
           <RegistrationDropdown
             label="Gender"
-            value={gender}
-            onValueChange={setGender}
+            value={formData.gender}
+            onValueChange={(value) => onFormChange('gender', value)}
             placeholder="Select your gender"
             options={genderOptions}
             required
@@ -278,8 +243,8 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
           <RegistrationDropdown
             label="Ethnicity"
-            value={ethnicity}
-            onValueChange={setEthnicity}
+            value={formData.ethnicity}
+            onValueChange={(value) => onFormChange('ethnicity', value)}
             placeholder="Select your ethnicity"
             options={ethnicityOptions}
             required
@@ -297,25 +262,25 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <RegistrationTextInput
             label="UoA ID or AUT Student Number"
-            value={universityId}
+            value={formData.universityId}
             subtitle="For example, 123456789 (UoA) and 12345678 (AUT)."
-            onChange={(e) => setUniversityId(e.target.value)}
+            onChange={(e) => onFormChange('universityId', e.target.value)}
             placeholder="Enter your UoA ID or AUT student number"
             required
           />
           <RegistrationTextInput
             label="UoA UPI or AUT Network Login"
-            value={upi}
+            value={formData.upi}
             subtitle="For example, setn738 (UoA) and ses7129 (AUT)."
-            onChange={(e) => setUpi(e.target.value)}
+            onChange={(e) => onFormChange('upi', e.target.value)}
             placeholder="Enter your UoA UPI or AUT network login"
             required
           />
 
           <RegistrationDropdown
             label="Area of Study"
-            value={areaOfStudy}
-            onValueChange={setAreaOfStudy}
+            value={formData.areaOfStudy}
+            onValueChange={(value) => onFormChange('areaOfStudy', value)}
             placeholder="Select your area of study"
             options={areaOfStudyOptions}
             required
@@ -323,8 +288,8 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
           <RegistrationDropdown
             label="Year Level"
-            value={yearLevel}
-            onValueChange={setYearLevel}
+            value={formData.yearLevel}
+            onValueChange={(value) => onFormChange('yearLevel', value)}
             placeholder="Select your year level"
             options={yearLevelOptions}
             required
@@ -372,35 +337,69 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
 
 export function StripeCheckoutForm() {
   const [clientSecret, setClientSecret] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    gender: '',
+    ethnicity: '',
+    universityId: '',
+    upi: '',
+    areaOfStudy: '',
+    yearLevel: '',
+  })
+
+  const handleFormChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const createPaymentIntent = async () => {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 500, formData }), // $5.00
+      })
+
+      if (!res.ok) {
+        throw new Error('Failed to create payment intent')
+      }
+
+      const data = await res.json()
+      if (data.error) {
+        throw new Error(data.error)
+      }
+
+      setClientSecret(data.clientSecret)
+      setLoading(false)
+    } catch (err: any) {
+      console.error('Error:', err)
+      setError(err.message)
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 500 }), // $5.00
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to create payment intent')
-        }
-        return res.json()
-      })
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error)
-        }
-        setClientSecret(data.clientSecret)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Error:', err)
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
+    // Only create payment intent when form has required data
+    if (
+      formData.firstName &&
+      formData.lastName &&
+      formData.email &&
+      formData.phoneNumber &&
+      formData.gender &&
+      formData.ethnicity &&
+      formData.universityId &&
+      formData.upi &&
+      formData.areaOfStudy &&
+      formData.yearLevel
+    ) {
+      createPaymentIntent()
+    }
+  }, [formData])
 
   const appearance = {
     theme: 'stripe' as const,
@@ -433,10 +432,107 @@ export function StripeCheckoutForm() {
 
   return (
     <div>
-      {clientSecret && (
+      {clientSecret ? (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm clientSecret={clientSecret} />
+          <CheckoutForm
+            clientSecret={clientSecret}
+            formData={formData}
+            onFormChange={handleFormChange}
+          />
         </Elements>
+      ) : (
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <RegistrationHeading label="Personal Information" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <RegistrationTextInput
+                label="First Name"
+                value={formData.firstName}
+                onChange={(e) => handleFormChange('firstName', e.target.value)}
+                placeholder="Enter your first name"
+                required
+              />
+              <RegistrationTextInput
+                label="Last Name"
+                value={formData.lastName}
+                onChange={(e) => handleFormChange('lastName', e.target.value)}
+                placeholder="Enter your last name"
+                required
+              />
+              <RegistrationTextInput
+                label="Phone Number"
+                value={formData.phoneNumber}
+                onChange={(e) => handleFormChange('phoneNumber', e.target.value)}
+                placeholder="Enter your phone number"
+                required
+              />
+              <RegistrationTextInput
+                label="Email"
+                value={formData.email}
+                onChange={(e) => handleFormChange('email', e.target.value)}
+                placeholder="Enter your email"
+                type="email"
+                required
+              />
+              <RegistrationDropdown
+                label="Gender"
+                value={formData.gender}
+                onValueChange={(value) => handleFormChange('gender', value)}
+                placeholder="Select your gender"
+                options={genderOptions}
+                required
+              />
+              <RegistrationDropdown
+                label="Ethnicity"
+                value={formData.ethnicity}
+                onValueChange={(value) => handleFormChange('ethnicity', value)}
+                placeholder="Select your ethnicity"
+                options={ethnicityOptions}
+                required
+              />
+            </div>
+          </div>
+          <div className="space-y-4">
+            <RegistrationHeading
+              label="University Information"
+              subtitle="If you are not a university student or recent alumni, you unfortunately cannot register for TANSA."
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <RegistrationTextInput
+                label="UoA ID or AUT Student Number"
+                value={formData.universityId}
+                subtitle="For example, 123456789 (UoA) and 12345678 (AUT)."
+                onChange={(e) => handleFormChange('universityId', e.target.value)}
+                placeholder="Enter your UoA ID or AUT student number"
+                required
+              />
+              <RegistrationTextInput
+                label="UoA UPI or AUT Network Login"
+                value={formData.upi}
+                subtitle="For example, setn738 (UoA) and ses7129 (AUT)."
+                onChange={(e) => handleFormChange('upi', e.target.value)}
+                placeholder="Enter your UoA UPI or AUT network login"
+                required
+              />
+              <RegistrationDropdown
+                label="Area of Study"
+                value={formData.areaOfStudy}
+                onValueChange={(value) => handleFormChange('areaOfStudy', value)}
+                placeholder="Select your area of study"
+                options={areaOfStudyOptions}
+                required
+              />
+              <RegistrationDropdown
+                label="Year Level"
+                value={formData.yearLevel}
+                onValueChange={(value) => handleFormChange('yearLevel', value)}
+                placeholder="Select your year level"
+                options={yearLevelOptions}
+                required
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

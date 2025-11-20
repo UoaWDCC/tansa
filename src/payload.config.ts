@@ -12,8 +12,9 @@ import { Sponsors } from './collections/Sponsors'
 import { CSVUploads } from './collections/CSVUploads'
 import { Logos } from './collections/Logos'
 import { Exec } from './collections/Execs'
+import { Registrations } from './collections/Registrations'
 import { s3Storage } from '@payloadcms/storage-s3'
-
+import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +26,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, NewsletterEmails, Sponsors, CSVUploads, Logos, Exec],
+  collections: [
+    Users,
+    Media,
+    Events,
+    NewsletterEmails,
+    Sponsors,
+    CSVUploads,
+    Logos,
+    Exec,
+    Registrations,
+  ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -59,6 +70,10 @@ export default buildConfig({
         region: process.env.S3_REGION,
         endpoint: process.env.S3_ENDPOINT,
       },
+    }),
+    importExportPlugin({
+      collections: ['users', 'registrations'],
+      // see below for a list of available options
     }),
   ],
 })
