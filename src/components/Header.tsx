@@ -33,7 +33,7 @@ const Header = () => {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-50 px-4 py-4 bg-tansa-blue">
+    <header className="sticky top-0 z-40 px-6 py-5 bg-tansa-blue">
       <div className="flex items-center justify-between w-full">
         {/*Left Side Element*/}
         <Link href="/" className="flex-1">
@@ -59,7 +59,7 @@ const Header = () => {
             </div>
           </div>
           {/*Mobile Logo*/}
-          <div className="flex md:hidden items-center space-x-2 mb-8 py-2">
+          <div className="flex items-center space-x-2 mb-8">
               <Image
                 src="/TANSA-LOGO.svg"
                 alt="TANSA bear logo"
@@ -69,7 +69,7 @@ const Header = () => {
               <h1 className="text-sm font-semibold text-tansa-cream">
                 Taiwanese and New Zealand<br />Students' Association
               </h1>
-            </div>
+          </div>
         </Link>
 
         {/* Navigation */}
@@ -130,26 +130,22 @@ const Header = () => {
             </Link>
           </div>
           {/* Mobile Hamburger */}
-          <div className="md:hidden ml-2 pt-5 pb-11 pr-2">
+          <div className="md:hidden ml-2 pt-5 pb-11 pr-2 z-50 mx-auto">
             <button
-              className="text-tansa-cream focus:outline-none"
               onClick={() => setMenuOpen(!menuOpen)}
+              className={`group flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none ${
+                menuOpen ? "open" : ""
+              }`}
             >
-              {menuOpen ? <X className="h-8 w-8 font-extrabold" /> : <Menu className="h-8 w-8" />}
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
             </button>
           </div>
         </div>
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8 transform transition-all duration-500 ease-out
-               animate-dropdown-slide">
-            {/* X Button inside dropdown */}
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="absolute top-8 right-6 text-tansa-blue hover:text-white transition font-extrabold"
-            >
-              <X className="h-8 w-8" />
-            </button>
+          <div className="md:hidden absolute top-0 left-0 right-0 bg-tansa-cream shadow-lg z-40 px-6 pt-8 pb-8 transform transition-all duration-500 ease-out">
 
             {/* Mobile Logo */}
             <div className="flex items-center space-x-2 mb-8">
