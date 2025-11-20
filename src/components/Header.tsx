@@ -59,7 +59,7 @@ const Header = () => {
             </div>
           </div>
           {/*Mobile Logo*/}
-          <div className="flex items-center space-x-2 mb-8">
+          <div className="md:hidden flex items-center space-x-2 mb-8">
               <Image
                 src="/TANSA-LOGO.svg"
                 alt="TANSA bear logo"
