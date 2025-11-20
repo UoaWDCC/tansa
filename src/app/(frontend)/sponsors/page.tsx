@@ -12,19 +12,19 @@ export default async function SponsorsPage() {
       <div className="bg-tansa-blue">
         {/* Header Section */}
         <div className="max-w-6xl h-[300px] mx-auto flex items-center justify-between pt-16 relative overflow-clip">
-          <div className="font-newkansas font-bold text-white leading-none text-8xl">
+          <div className="font-newkansas font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
             <h1>Our</h1>
             <h1>Sponsors</h1>
           </div>
 
-          <div className="absolute right-[-20px] bottom-[-250px]">
+          <div className="absolute right-[-20px] bottom-[-180px] sm:bottom-[-220px] md:bottom-[-250px] z-0 w-[280px] sm:w-[370px] md:w-[450px]">
             <Image
               src="/bears/running-pointing.svg"
               alt="Bear"
               width={450}
               height={450}
               quality={50}
-              className="object-contain"
+              className="object-contain w-full h-auto"
             />
           </div>
         </div>

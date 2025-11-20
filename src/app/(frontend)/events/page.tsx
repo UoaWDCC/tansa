@@ -45,18 +45,18 @@ export default function PastEventsPage() {
       {/* Header Section */}
       <div className="max-w-6xl h-[300px] mx-auto flex items-center justify-between py-16 relative overflow-clip">
         {/* Left text */}
-        <div className="font-newkansas font-bold text-white leading-none text-8xl">
+        <div className="font-newkansas font-bold text-white leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl relative z-10 pl-4 sm:pl-8 lg:pl-0">
           <h1>Past</h1>
           <h1>Events</h1>
         </div>
         {/* Bear image */}
-        <div className="absolute right-0 bottom-[-190px] select-none">
+        <div className="absolute right-0 bottom-[-120px] sm:bottom-[-150px] md:bottom-[-190px] select-none z-0 w-[250px] sm:w-[350px] md:w-[450px]">
           <Image
             src="/bears/hooray 1.svg"
             alt="Bear"
             width={450}
             height={450}
-            className="object-contain"
+            className="object-contain w-full h-auto"
             priority // Prioritize header image
           />
         </div>

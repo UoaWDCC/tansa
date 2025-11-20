@@ -24,7 +24,7 @@ function processTeamCategories(exec: Awaited<ReturnType<typeof getExecMembers>>)
     'Public Relations Officer',
     'Design',
     'Photography',
-    'Interns'
+    'Interns',
   ]
 
   return categoryOrder
@@ -43,9 +43,11 @@ async function TeamContent() {
     <div className="bg-tansa-blue">
       <div className="bg-tansa-blue overflow-hidden">
         {/* HERO SECTION - stays like original */}
-        <div className="max-w-6xl relative mx-auto flex items-center justify-between 
-                py-[clamp(2.5rem,6vw,4.5rem)] h-[clamp(240px,35vw,320px)] lg:h-[300px] lg:py-16">
-          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0">
+        <div
+          className="max-w-6xl relative mx-auto flex items-center justify-between 
+                py-[clamp(2.5rem,6vw,4.5rem)] h-[clamp(240px,35vw,320px)] lg:h-[300px] lg:py-16"
+        >
+          <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
             {/* Text scales on small screens, fixed look on large screens */}
             <h1 className="text-[clamp(2.5rem,5.5vw,4rem)] sm:text-[clamp(3rem,7vw,5rem)] lg:text-6xl text-white font-newkansas">
               Meet our
@@ -56,7 +58,7 @@ async function TeamContent() {
           </div>
 
           {/* Bear scales on small screens, fixed position/size on large screens */}
-          <div className="w-[clamp(220px,35vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-50px] lg:bottom-[-70px] select-none">
+          <div className="w-[clamp(180px,30vw,400px)] lg:w-[400px] absolute right-2 sm:right-4 md:right-10 bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px] select-none z-0">
             <Image
               src="/bears/lying_on_stomach.svg"
               alt="bear lying on stomach"
