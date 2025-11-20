@@ -45,7 +45,7 @@ async function TeamContent() {
         {/* HERO SECTION - stays like original */}
         <div
           className="max-w-6xl relative mx-auto flex items-center justify-between 
-                py-[clamp(2.5rem,6vw,4.5rem)] h-[clamp(240px,35vw,320px)] lg:h-[300px] lg:py-16"
+                py-[clamp(1.5rem,4vw,4.5rem)] h-[clamp(180px,25vw,300px)] lg:h-[300px] lg:py-16"
         >
           <div className="pl-4 sm:pl-8 md:pl-12 mt-[clamp(0.5rem,2vw,1rem)] lg:mt-0 relative z-10">
             {/* Text scales on small screens, fixed look on large screens */}

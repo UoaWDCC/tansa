@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="relative bg-tansa-blue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <section className="relative grid min-h-[70vh] lg:h-[calc(100vh-80px)] grid-cols-2 items-center gap-6 py-10 overflow-hidden">
+        <section className="relative grid min-h-[50vh] sm:min-h-[60vh] lg:h-[calc(100vh-80px)] grid-cols-2 items-center gap-6 py-6 sm:py-8 md:py-10 overflow-hidden">
           <div className="z-10 font-newkansas text-tansa-cream ">
             <div className="flex items-baseline gap-3">
               <h2 className="font-bold leading-none text-[clamp(2.25rem,6vw,8rem)]">Hello!</h2>

@@ -6,7 +6,7 @@ import React from 'react'
 const page = () => {
   return (
     <main className="min-h-screen select-none">
-      <div className="bg-tansa-blue relative h-[300px] flex items-center justify-center flex-col text-center space-y-4 rounded-b-4x overflow-clip">
+      <div className="bg-tansa-blue relative h-[200px] sm:h-[250px] md:h-[300px] flex items-center justify-center flex-col text-center space-y-2 sm:space-y-4 rounded-b-4x overflow-clip">
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-white font-newkansas z-10 relative">
           Join Us
         </h1>
