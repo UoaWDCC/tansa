@@ -6,11 +6,11 @@ import { notFound } from 'next/navigation'
 import EventGalleryClient from '@/components/events/EventsGalleryClient'
 
 interface EventGalleryPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default async function EventGalleryPage({ params }: EventGalleryPageProps) {
-  const { slug } = params
+  const { slug } = await params
 
   // Server-side fetch
   const events: EventItem[] = await getEvents()
