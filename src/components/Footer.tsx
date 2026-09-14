@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Send, Snowflake, Mail, Instagram, Facebook } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Footer = () => {
   const [email, setEmail] = useState<string>('')
@@ -81,9 +82,9 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/events" className="hover:underline">
+                <Link href="/events" className="hover:underline">
                   Past Events
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
