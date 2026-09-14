@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import csv from 'csv-parser'
-import fs from 'fs'
-import path from 'path'
+import { Readable } from 'stream'
 
 type Sponsor = {
   name?: string
@@ -117,20 +116,17 @@ export const Sponsors: CollectionConfig = {
               id: data.csvFile,
             })
 
-            if (!csvUpload || !csvUpload.filename) {
-              throw new Error('CSV file not found in uploads or filename is missing')
+            if (!csvUpload || !csvUpload.url) {
+              throw new Error('CSV file not found in uploads or URL is missing')
             }
 
-            const filePath = path.join(process.cwd(), 'media', csvUpload.filename)
-
-            if (!fs.existsSync(filePath)) {
-              throw new Error(`CSV file not found at path: ${filePath}`)
-            }
+            const response = await fetch(csvUpload.url)
+            const buffer = Buffer.from(await response.arrayBuffer())
 
             const sponsors: any[] = []
 
             await new Promise((resolve, reject) => {
-              fs.createReadStream(filePath)
+              Readable.from(buffer)
                 .pipe(csv())
                 .on('data', (row) => {
                   if (row['Name'] && row['Location'] && row['Sponsorship Details']) {

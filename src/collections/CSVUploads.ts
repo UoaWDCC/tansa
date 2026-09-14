@@ -1,12 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import csv from 'csv-parser'
-import fs from 'fs'
-import path from 'path'
+import { Readable } from 'stream'
 
 export const CSVUploads: CollectionConfig = {
   slug: 'csv-uploads',
   upload: {
-    staticDir: 'media',
     mimeTypes: ['text/csv'],
   },
   admin: {
@@ -17,11 +15,12 @@ export const CSVUploads: CollectionConfig = {
   hooks: {
     afterChange: [
       async ({ doc, req }) => {
-        const filePath = path.join(process.cwd(), 'media', doc.filename)
+        const response = await fetch(doc.url)
+        const buffer = Buffer.from(await response.arrayBuffer())
         const sponsors: any[] = []
 
         await new Promise((resolve, reject) => {
-          fs.createReadStream(filePath)
+          Readable.from(buffer)
             .pipe(csv())
             .on('data', (row) => {
               if (row['Name'] && row['Location'] && row['Sponsorship Details']) {

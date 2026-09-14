@@ -56,9 +56,13 @@ export default buildConfig({
         logos: {
           prefix: 'logos',
         },
+        'csv-uploads': {
+          prefix: 'csv-uploads',
+        },
       } as {
         media: { prefix: string }
         logos: { prefix: string }
+        'csv-uploads': { prefix: string }
       },
       bucket: process.env.S3_BUCKET as string,
       config: {
